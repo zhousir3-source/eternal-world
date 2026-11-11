@@ -143,3 +143,15 @@
 - 数据兼容：未修改存档格式、数据协议、资源文件；不删除功能。
 - 主要阻塞：`Network.CreateCharacter` 和账号认证路径仍存在；未实现真正无账号离线角色创建、自动加载和本地存档；中文字体覆盖和 Android APK 尚未通过构建验证。
 - 下一步：优先从启动 FSM、角色数据来源和持久化路径入手，完成一个可测试的本地角色数据闭环，再执行 Godot/Android 构建。
+
+## 2026-11-11 本轮：角色预览资源索引统一校验
+
+- 范围：上轮为 `Traits.GetValues()` 添加了资源索引保护，但角色预览的 `UpdateCharacterCreatorBody()` 和 `UpdateCharacterCreatorHair()` 仍直接索引种族、肤色、发型和发色数组，资源不完整时依旧可能越界。本轮只消除这两个预览入口的未检查索引。
+- 修改文件：`sources/gui/character/Character.gd`。两个预览更新方法统一使用 `traitsPanel.GetValues()` 的已校验外观字典，空字典直接返回；成功时仍调用原有 `SetBody`、`SetFace`、`SetHair`，保留性别选择和既有视觉刷新。
+- 代码提交：`def443d4d78a741e24017fd33ac1c91497b76c7b`；本开发记录单独提交。
+- 检查：远程重新读取提交后源码，确认两个入口均使用已校验的外观字典，且不再直接访问 `races[traitsPanel.raceValue]`。这是源码文本核对，不等于 Godot 解析通过。
+- 构建环境：当前执行环境没有 Godot 可执行程序或 Android SDK `sdkmanager`，因此 Godot 解析、自动化游戏测试、Android APK 导出、实机测试均**未验证**。没有可交付 APK。
+- 汉化进度：本轮未新增汉化内容；UI/HUD、NPC、任务、怪物、物品、武器、防具、技能、商店、制作及系统提示完整覆盖率仍未验证。
+- 兼容性：未修改存档格式、角色字段、网络协议、master 或其他分支；未合并、未发布。
+- 遗留阻塞：账号登录和 `Network.CreateCharacter`、`Network.CharacterListing`、`Network.ConnectCharacter` 依赖尚未拆除，真正无账号单机与本地自动/手动存档未完成；字体打包与 Android 导出尚未验证。
+- 下一步：优先定位真实存档持久化与角色启动数据所有者，在不覆盖旧存档的前提下实现一个可验收的本地角色创建/读取切片；具备 Godot + Android SDK 环境后立即执行解析和 APK 导出。
