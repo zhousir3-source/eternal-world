@@ -271,7 +271,11 @@ func EnableCharacterCreator(enable : bool):
 			if Launcher.Camera.IsZooming(ActorCommons.CameraZoomDefault):
 				Launcher.Camera.ZoomAt(ActorCommons.CameraZoomDouble)
 			RandomizeCharacter()
-			AddCharacter(traitsPanel.GetValues(), {}, ActorCommons.MaxCharacterCount)
+			var previewAppearance : Dictionary = traitsPanel.GetValues()
+			if not previewAppearance.is_empty():
+				AddCharacter(previewAppearance, {}, ActorCommons.MaxCharacterCount)
+			else:
+				Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]角色外观资源缺失，暂时无法显示角色预览。[/color]")
 		else:
 			if Launcher.Camera.IsZooming(ActorCommons.CameraZoomDouble):
 				Launcher.Camera.ZoomAt(ActorCommons.CameraZoomDefault)
