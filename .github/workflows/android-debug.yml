@@ -64,6 +64,16 @@ jobs:
       - name: Import project assets
         run: godot --headless --editor --import --quit
 
+      - name: Validate project loads
+        run: godot --headless --path . --editor --quit
+
+      - name: Verify current theme font resources
+        run: |
+          test -f data/graphics/fonts/alagard-16.ttf
+          test -f data/graphics/fonts/romulus-16.ttf
+          grep -q 'default_font = ExtResource("18_v607h")' data/themes/DefaultTheme.tres
+          echo "Font files exist; CJK glyph coverage still requires runtime validation."
+
       - name: Export APK
         env:
           GODOT_ANDROID_KEYSTORE_RELEASE_PATH: /root/debug.keystore
