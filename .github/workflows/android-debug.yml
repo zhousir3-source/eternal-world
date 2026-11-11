@@ -40,12 +40,15 @@ jobs:
           apt-get install -y --no-install-recommends libfontconfig1 unzip fonts-noto-cjk python3-fonttools
           rm -rf /var/lib/apt/lists/*
 
-      - name: Prepare Godot export templates
+      - name: Verify Godot and Android export templates
         run: |
-          mkdir -p ~/.local/share/godot/export_templates/
-          mkdir -p ~/.config/
-          cp -r /root/.config/godot ~/.config/godot
-          cp -r /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+          set -eu
+          godot --version
+          TEMPLATE_DIR="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          test -d "$TEMPLATE_DIR"
+          test -s "$TEMPLATE_DIR/android_source.zip"
+          test -f "$TEMPLATE_DIR/android_debug.apk"
+          echo "Godot export templates available: $TEMPLATE_DIR"
 
       - name: Create Android debug signing key
         run: |
