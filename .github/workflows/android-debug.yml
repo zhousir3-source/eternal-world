@@ -14,7 +14,6 @@ on:
       - "**.svg"
       - "project.godot"
       - "export_presets.cfg"
-      - "export_presets.cfg"
       - "versions.cfg"
       - ".github/workflows/android-debug.yml"
 
@@ -76,8 +75,8 @@ jobs:
 
       - name: Verify APK exists
         run: |
-          test -s build/android/Eternal-World-debug.apk
-          ls -lh build/android/Eternal-World-debug.apk
+          test -s build/android/XiaYe-zh-preview-debug.apk
+          ls -lh build/android/XiaYe-zh-preview-debug.apk
           unzip -t build/android/Eternal-World-debug.apk >/dev/null
           echo "APK archive integrity: OK"
 
@@ -85,6 +84,6 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: XiaYe-ZH-Preview-Android-Debug
-          path: build/android/Eternal-World-debug.apk
+          path: build/android/XiaYe-zh-preview-debug.apk
           if-no-files-found: error
           retention-days: 14
