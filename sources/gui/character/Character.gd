@@ -192,7 +192,9 @@ func RefreshSuggestedButton():
 
 func CreateCharacter():
 	if isCharacterCreatorEnabled:
-		var nickname : String = characterNameLineEdit.get_text()
+		# Normalize accidental surrounding whitespace before local/name validation.
+		var nickname : String = characterNameLineEdit.get_text().strip_edges()
+		characterNameLineEdit.text = nickname
 		var err : NetworkCommons.CharacterError = NetworkCommons.CheckCharacterInformation(nickname)
 		if err != NetworkCommons.CharacterError.ERR_OK:
 			FillWarningLabel(err)
