@@ -40,9 +40,33 @@ var isConnectPrimary : bool					= false
 var recoveryState : RecoveryState			= RecoveryState.NONE
 var pendingFocusControl : Control			= null
 var defaultPlaceholders : Dictionary		= {}
+var autoOfflineLogin : bool = false
+var autoOfflineAccountReady : bool = false
+var autoOfflineCreateAttempted : bool = false
+
+const OfflineAccountName : String = "XiaYe_Local_Save"
+const OfflineAccountPassword : String = "XiaYe_Local_Save_2026"
+const OfflineAccountEmail : String = "xiaoye@local.game"
 
 #
 func FillWarningLabel(err : NetworkCommons.AuthError):
+	if autoOfflineLogin:
+		if err == NetworkCommons.AuthError.ERR_AUTH and not autoOfflineCreateAttempted:
+			autoOfflineCreateAttempted = true
+			Network.CreateAccount(OfflineAccountName, OfflineAccountPassword, OfflineAccountEmail, true, NetworkCommons.GetPlatform())
+			return
+		if err == NetworkCommons.AuthError.ERR_NAME_AVAILABLE:
+			Network.LoginWithPassword(OfflineAccountName, OfflineAccountPassword, true, NetworkCommons.GetPlatform())
+			return
+		if err == NetworkCommons.AuthError.ERR_OK:
+			autoOfflineLogin = false
+			nameText = OfflineAccountName
+			SaveAccountName()
+			FSM.EnterState(FSM.States.CHAR_SCREEN)
+			return
+		autoOfflineLogin = false
+		Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]本地冒险初始化失败，请重启游戏或检查存档目录。[/color]")
+		return
 	if isAccountCreatorEnabled:
 		FSM.EnterState(FSM.States.LOGIN_SCREEN)
 		if err == NetworkCommons.AuthError.ERR_OK:
@@ -477,6 +501,27 @@ func _on_password_text_changed(_newText : String):
 func _on_remember_me_toggled(toggled_on : bool):
 	if not toggled_on:
 		ClearSavedToken()
+
+func StartOfflineAdventure():
+	if autoOfflineLogin:
+		return
+	autoOfflineLogin = true
+	autoOfflineCreateAttempted = false
+	if not Network.Client or not Network.ENetServer:
+		Launcher.Mode(true, true)
+	Launcher.GUI.loadingControl.set_visible(true)
+	var waitFrames : int = 0
+	while not Network.clientConnected and waitFrames < 120:
+		await get_tree().create_timer(0.25).timeout
+		waitFrames += 1
+	if not Network.clientConnected:
+		autoOfflineLogin = false
+		Launcher.GUI.loadingControl.set_visible(false)
+		Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]本地游戏服务启动超时，请重新打开游戏。[/color]")
+		return
+	nameText = OfflineAccountName
+	Network.LoginWithPassword(OfflineAccountName, OfflineAccountPassword, true, NetworkCommons.GetPlatform())
+	FSM.EnterState(FSM.States.LOGIN_PROGRESS)
 
 func _ready():
 	Launcher.launchModeUpdated.connect(OnlineMode)
