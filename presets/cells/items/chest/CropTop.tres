@@ -14,6 +14,6 @@ shader = ExtResource("3_tcx5b")
 buyPrice = 1000
 sellPrice = 100
 id = 2739365196
-name = "Crop Top"
+name = "短款上衣"
 icon = ExtResource("1_of3co")
 weight = 300.0
