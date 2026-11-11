@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_cell")
 slot = 11
-name = "Artis Flour Sack"
-description = "A sack of fine milled flour stamped with the Artis bakery seal."
+name = "阿尔蒂斯面粉袋"
+description = "一袋精细研磨的面粉，袋上盖有阿尔蒂斯面包店的印章。"
 icon = ExtResource("1_sack")
 weight = 50.0
