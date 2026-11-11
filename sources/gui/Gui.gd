@@ -137,26 +137,21 @@ func OpenDiscord():
 
 func DisplayFirstLogin():
 	if LauncherCommons.isWeb:
-		UICommons.MessageBox("""Welcome to Source of Mana!
+		UICommons.MessageBox("""欢迎来到《夏叶的异世界编年史》！
 
-You're currently playing the web version, which may run slower and isn't as stable as the downloadable versions.
+当前版本仍在持续开发中。你可以探索现有区域、体验战斗与角色成长，并帮助我们发现问题。
 
-This version is mainly here to showcase the game.
-For the best experience, we recommend using the native client found on our itch.io page (Available on Windows, Linux, macOS, and Android).
+感谢你的体验，祝你冒险愉快！
 """,
-			settingsWindow.set_sessionfirstlogin.bind(false), "OK",
-			OpenDiscord, "Join our Discord")
+			settingsWindow.set_sessionfirstlogin.bind(false), "确定")
 	else:
-		UICommons.MessageBox("""Welcome to Source of Mana!
+		UICommons.MessageBox("""欢迎来到《夏叶的异世界编年史》！
 
-This is an open-source MMORPG and still a work in progress. You're welcome to explore, test, and enjoy the current features.
+这里是一片正在逐步展开的异世界。你将创建自己的角色，探索村庄与野外区域，完成任务、挑战魔物，并不断提升实力。
 
-We're also always looking for contributors!
-If you'd like to get involved in development, design, writing, or testing, feel free to join our community.
-Otherwise, have fun and thank you for playing!
+感谢你参与本作测试，祝你冒险愉快！
 """,
-			settingsWindow.set_sessionfirstlogin.bind(false), "OK",
-			OpenDiscord, "Join our Discord")
+			settingsWindow.set_sessionfirstlogin.bind(false), "确定")
 
 func DisplayDeath():
 	UICommons.MessageBox(DeathMessages.Pick(), Network.TriggerRespawn, "Respawn")
