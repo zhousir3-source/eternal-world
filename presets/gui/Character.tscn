@@ -380,7 +380,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Display/Traits/Margin/VBox/Gender" unique_id=870030989]
 layout_mode = 2
-text = "Gender"
+text = "性别"
 
 [node name="Empty" type="Control" parent="Display/Traits/Margin/VBox/Gender" unique_id=1112144795]
 layout_mode = 2
