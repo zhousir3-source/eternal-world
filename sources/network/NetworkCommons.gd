@@ -112,7 +112,7 @@ const PlayerNameMinSize : int			= 3
 const PlayerNameMaxSize : int			= 30
 const CharacterNicknameMinSize : int	= 2
 const CharacterNicknameMaxSize : int	= 30
-const CharacterNicknameValidRegex : String = "^[\\\\p{L}\\\\p{N}_#!@%&:;<>,\\\\$\\\\^*\\\\(\\\\)_+=\\\\{\\\\}\\\\[\\\\]\\\\.\\\\?/-]+$"
+const CharacterNicknameValidRegex : String = "^[\p{L}\p{N}_#!@%&:;<>,\$\^*\(\)_+=\{\}\[\]\.\?/-]+$"
 const PasswordMinSize : int				= 6
 const PasswordMaxSize : int				= 128
 const EntryValidRegex : String			= "^[\\w#!@%&:;<>,\\$\\^*\\(\\)_+=\\{\\}\\[\\]\\.?/-]+$"
