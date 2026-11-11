@@ -101,7 +101,7 @@ text = "窗口分辨率"
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Sets the size of the game window."
+tooltip_text = "设置游戏窗口的大小。"
 
 [node name="Scaling" type="HBoxContainer" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox" unique_id=1909061268]
 layout_mode = 2
@@ -116,7 +116,7 @@ text = "画面缩放"
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Zooms the whole game view by one, two or three times."
+tooltip_text = "将整个游戏画面放大为 1 倍、2 倍或 3 倍。"
 selected = 0
 item_count = 3
 popup/item_0/text = "x1"
@@ -128,12 +128,12 @@ popup/item_2/id = 2
 
 [node name="ActionOverlay" type="CheckButton" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox" unique_id=1637200902]
 layout_mode = 2
-tooltip_text = "Shows touch buttons on screen for movement and actions."
+tooltip_text = "在屏幕上显示用于移动和执行动作的触控按钮。"
 text = "操作按钮显示"
 
 [node name="ResetWindows" type="Button" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox" unique_id=1637200903]
 layout_mode = 2
-tooltip_text = "Resets all game windows to their default size and position."
+tooltip_text = "将所有游戏窗口恢复为默认大小和位置。"
 text = "重置窗口布局"
 
 [node name="HSeparator2" type="HSeparator" parent="Layout/Margin/TabBar/Render/RenderVBox" unique_id=186324792]
@@ -148,17 +148,17 @@ text = "特效"
 
 [node name="Lighting" type="CheckButton" parent="Layout/Margin/TabBar/Render/RenderVBox/EffectVBox" unique_id=392747916]
 layout_mode = 2
-tooltip_text = "Turns on dynamic lights and shadows."
+tooltip_text = "开启动态光照与阴影效果。"
 text = "光照"
 
 [node name="HQx4" type="CheckButton" parent="Layout/Margin/TabBar/Render/RenderVBox/EffectVBox" unique_id=787563390]
 layout_mode = 2
-tooltip_text = "Smooths the image when the view is scaled up."
+tooltip_text = "放大游戏画面时进行平滑处理。"
 text = "高质量缩放"
 
 [node name="CRT" type="CheckButton" parent="Layout/Margin/TabBar/Render/RenderVBox/EffectVBox" unique_id=307353882]
 layout_mode = 2
-tooltip_text = "Adds an old television screen look."
+tooltip_text = "为画面添加复古电视屏幕效果。"
 text = "复古显像效果"
 
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Render/RenderVBox" unique_id=1915786938]
@@ -183,7 +183,7 @@ text = "音量"
 [node name="Global" type="HBoxContainer" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox" unique_id=508225996]
 layout_mode = 2
 size_flags_vertical = 3
-tooltip_text = "Sets the volume of every sound in the game at once."
+tooltip_text = "统一调整游戏中所有声音的音量。"
 
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/Global" unique_id=591312565]
 layout_mode = 2
@@ -202,7 +202,7 @@ ticks_on_borders = true
 [node name="Music" type="HBoxContainer" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox" unique_id=201837471]
 layout_mode = 2
 size_flags_vertical = 3
-tooltip_text = "Sets the volume of the background music."
+tooltip_text = "调整游戏背景音乐的音量。"
 
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/Music" unique_id=201837472]
 layout_mode = 2
@@ -221,7 +221,7 @@ ticks_on_borders = true
 [node name="Alteration SFX" type="HBoxContainer" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox" unique_id=201837465]
 layout_mode = 2
 size_flags_vertical = 3
-tooltip_text = "Sets the volume of combat feedback like hits, crits, dodges and heals."
+tooltip_text = "调整攻击命中、暴击、闪避和治疗等战斗反馈音效的音量。"
 
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/Alteration SFX" unique_id=201837466]
 layout_mode = 2
@@ -240,7 +240,7 @@ ticks_on_borders = true
 [node name="Notification SFX" type="HBoxContainer" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox" unique_id=201837474]
 layout_mode = 2
 size_flags_vertical = 3
-tooltip_text = "Sets the volume of alerts meant for you: whispers, level ups, skill ups and quest updates."
+tooltip_text = "调整私聊、升级、技能提升和任务更新等提示音量。"
 
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/Notification SFX" unique_id=201837475]
 layout_mode = 2
@@ -259,7 +259,7 @@ ticks_on_borders = true
 [node name="State SFX" type="HBoxContainer" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox" unique_id=201837468]
 layout_mode = 2
 size_flags_vertical = 3
-tooltip_text = "Sets the volume of creatures and surrounding objects: attacks, deaths and chests opening."
+tooltip_text = "调整生物和环境物体的音效音量，例如攻击、死亡和宝箱开启。"
 
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/State SFX" unique_id=201837469]
 layout_mode = 2
@@ -278,7 +278,7 @@ ticks_on_borders = true
 [node name="Other Entities" type="HBoxContainer" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox" unique_id=201837477]
 layout_mode = 2
 size_flags_vertical = 3
-tooltip_text = "Sets the volume of fights you are not part of. Your own actions and your target stay at full volume."
+tooltip_text = "调整其他战斗的音量；你自己的动作和当前目标仍保持完整音量。"
 
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/Other Entities" unique_id=201837478]
 layout_mode = 2
@@ -299,7 +299,7 @@ layout_mode = 2
 
 [node name="MuteUnfocused" type="CheckButton" parent="Layout/Margin/TabBar/Audio/VBoxContainer" unique_id=201837480]
 layout_mode = 2
-tooltip_text = "Silences the game while its window is in the background."
+tooltip_text = "游戏窗口切换到后台时自动静音。"
 text = "切换窗口时静音"
 
 [node name="Input" type="TabContainer" parent="Layout/Margin/TabBar" unique_id=753213710]
@@ -313,6 +313,7 @@ metadata/_tab_index = 2
 visible = false
 layout_mode = 2
 script = ExtResource("4_ehe4h")
+visible = false
 metadata/_tab_index = 3
 
 [node name="AccountVBox" type="VBoxContainer" parent="Layout/Margin/TabBar/Account" unique_id=1151872733]
@@ -393,12 +394,12 @@ theme_override_constants/separation = 10
 
 [node name="BugReports" type="CheckButton" parent="Layout/Margin/TabBar/Privacy/PrivacyVBox" unique_id=860000013]
 layout_mode = 2
-tooltip_text = "Sends anonymous crash and error reports to help fix bugs. No personal data is collected."
+tooltip_text = "发送匿名崩溃和错误报告以帮助修复问题，不会收集个人数据。"
 text = "问题反馈"
 
 [node name="LocalServer" type="CheckButton" parent="Layout/Margin/TabBar/Privacy/PrivacyVBox" unique_id=860000014]
 layout_mode = 2
-tooltip_text = "Connects to a dedicated server running on this machine (127.0.0.1) instead of the public server."
+tooltip_text = "连接到本机运行的本地服务，而不是公共服务器。"
 text = "★ 本地服务器"
 
 [node name="Credits" type="ScrollContainer" parent="Layout/Margin/TabBar" unique_id=850000001]
