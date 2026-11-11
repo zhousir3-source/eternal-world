@@ -14,6 +14,6 @@ shader = ExtResource("3_shader")
 buyPrice = 2700
 sellPrice = 270
 id = 0
-name = "Druid Robe"
+name = "德鲁伊长袍"
 icon = ExtResource("1_icon")
 weight = 600.0
