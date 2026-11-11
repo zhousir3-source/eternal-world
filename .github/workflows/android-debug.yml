@@ -63,7 +63,7 @@ jobs:
 
       - name: Extract Simplified Chinese font face
         run: |
-          FONT_SOURCE=/usr/share/fonts/opentype/noto/NotoSansSC-Regular.ttf
+          FONT_SOURCE=/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc
           test -s "$FONT_SOURCE"
           mkdir -p data/graphics/fonts
           python3 - <<'PY'
