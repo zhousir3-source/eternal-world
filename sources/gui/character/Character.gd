@@ -44,7 +44,7 @@ func FillWarningLabel(err : NetworkCommons.CharacterError):
 			warn = "名称只能包含字母、数字和允许使用的符号。"
 			RequestFocus(characterNameLineEdit)
 		NetworkCommons.CharacterError.ERR_NAME_SIZE:
-			warn = "名称长度必须为%d至%d个字符。" % [NetworkCommons.PlayerNameMinSize, NetworkCommons.PlayerNameMaxSize]
+			warn = "角色名称长度必须为%d至%d个字符。" % [NetworkCommons.CharacterNicknameMinSize, NetworkCommons.CharacterNicknameMaxSize]
 			RequestFocus(characterNameLineEdit)
 		NetworkCommons.CharacterError.ERR_EMPTY_ACCOUNT:
 			EnableCharacterCreator(true)
