@@ -69,12 +69,20 @@ jobs:
           python3 - <<'PY'
           from fontTools.ttLib import TTCollection
           collection = TTCollection('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc')
-          # Noto Sans CJK collection order: JP, KR, SC, TC, HK.
-          font = collection.fonts[2]
-          family_names = {record.toUnicode() for record in font['name'].names if record.nameID in (1, 4, 6)}
-          print('Extracted font names:', sorted(family_names))
-          if not any('SC' in name.upper() for name in family_names):
-              raise SystemExit('Selected TTC face is not the Simplified Chinese (SC) font.')
+          # Select by metadata rather than assuming the TTC face order.
+          def names(font):
+              return {record.toUnicode() for record in font['name'].names if record.nameID in (1, 4, 6)}
+          candidates = [font for font in collection.fonts if any('Noto Sans CJK SC' in name for name in names(font))]
+          if len(candidates) != 1:
+              raise SystemExit(f'Expected one Simplified Chinese font face, found {len(candidates)}')
+          font = candidates[0]
+          required = '夏叶男女创建角色保存读取背包装备技能任务设置退出确认中文字体'
+          supported = set().union(*(set(table.cmap) for table in font['cmap'].tables if table.isUnicode()))
+          missing = sorted({character for character in required if ord(character) not in supported})
+          if missing:
+              raise SystemExit(f'Chinese UI font is missing required glyphs: {"".join(missing)}')
+          print('Selected font face:', sorted(names(font)))
+          print('Verified Chinese UI glyphs:', len(set(required)))
           font.flavor = None
           font.save('data/graphics/fonts/NotoSansSC-Regular.ttf')
           PY
