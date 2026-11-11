@@ -315,25 +315,29 @@ func EnableCharacterCreator(enable : bool):
 
 func UpdateCharacterCreatorBody():
 	if isCharacterCreatorEnabled and charactersNode[ActorCommons.MaxCharacterCount]:
-		var races : PackedInt64Array = DB.RacesDB.keys()
-		var race : RaceData = DB.GetRace(races[traitsPanel.raceValue])
-		var skins : Dictionary[String, Material] = race.skins if race else {}
-		var skinsKeys : PackedStringArray = skins.keys()
-		charactersNode[ActorCommons.MaxCharacterCount].stat.race = races[traitsPanel.raceValue]
-		charactersNode[ActorCommons.MaxCharacterCount].stat.skintone = skinsKeys[traitsPanel.skintoneValue].hash()
-		charactersNode[ActorCommons.MaxCharacterCount].stat.gender = traitsPanel.genderValue
-		if charactersNode[ActorCommons.MaxCharacterCount].visual:
-			charactersNode[ActorCommons.MaxCharacterCount].visual.SetBody()
-			charactersNode[ActorCommons.MaxCharacterCount].visual.SetFace()
+		# Use the same validated appearance snapshot as character creation.
+		# Avoid direct array indexing while Android resources are still loading.
+		var appearance : Dictionary = traitsPanel.GetValues()
+		if appearance.is_empty():
+			return
+		var preview : Entity = charactersNode[ActorCommons.MaxCharacterCount]
+		preview.stat.race = appearance["race"]
+		preview.stat.skintone = appearance["skintone"]
+		preview.stat.gender = appearance["gender"]
+		if preview.visual:
+			preview.visual.SetBody()
+			preview.visual.SetFace()
 
 func UpdateCharacterCreatorHair():
 	if isCharacterCreatorEnabled and charactersNode[ActorCommons.MaxCharacterCount]:
-		var hairstyles : PackedInt64Array = DB.HairstylesDB.keys()
-		var haircolors : PackedInt64Array = DB.PalettesDB[DB.Palette.HAIR].keys()
-		charactersNode[ActorCommons.MaxCharacterCount].stat.hairstyle = hairstyles[traitsPanel.hairstyleValue]
-		charactersNode[ActorCommons.MaxCharacterCount].stat.haircolor = haircolors[traitsPanel.haircolorValue]
-		if charactersNode[ActorCommons.MaxCharacterCount].visual:
-			charactersNode[ActorCommons.MaxCharacterCount].visual.SetHair()
+		var appearance : Dictionary = traitsPanel.GetValues()
+		if appearance.is_empty():
+			return
+		var preview : Entity = charactersNode[ActorCommons.MaxCharacterCount]
+		preview.stat.hairstyle = appearance["hairstyle"]
+		preview.stat.haircolor = appearance["haircolor"]
+		if preview.visual:
+			preview.visual.SetHair()
 
 func RefreshOnce():
 	if isCharacterCreatorEnabled:
