@@ -14,6 +14,6 @@ shader = ExtResource("3_moa1a")
 buyPrice = 1000
 sellPrice = 100
 id = 878238790
-name = "Tank Top"
+name = "背心"
 icon = ExtResource("1_ipbbs")
 weight = 300.0
