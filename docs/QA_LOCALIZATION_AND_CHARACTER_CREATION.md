@@ -168,3 +168,14 @@
 - 旧档兼容：不修改存档格式、数据字段、角色创建路径或任何旧存档。
 - 阻塞：游戏仍含账号认证、隐藏本地账号、Network 角色创建及本地服务依赖；不能称为真正离线单机。中文字体打包尚未验证，APK 尚未生成。
 - 下一步：先准备可运行的 Godot 4.7 与 Android SDK 构建环境并验证导出配置；随后优先实现无账号的本地角色创建、加载和保存闭环，保持旧档兼容。
+
+## 2026-11-12 本轮：Android 地图资源导出排除项修复
+
+- 本轮范围：Android 导出预设之前使用 `export_filter="all_resources"`，却又在 `exclude_filter` 中显式排除 `data/maps/*`，有地图资源无法进入 APK 的风险。本轮只移除 Android 预设的这一项排除，其他平台预设不变。
+- 修改文件：`export_presets.cfg`；代码提交 `e33349cdeaa652e2687ff54a70b76e9c6c3b0c01`。
+- 修改后静态检查：通过 GitHub 重新读取导出配置，确认 Android 的 `exclude_filter` 不再包含 `data/maps/*`，Windows/Linux/macOS/iOS/Web/Headless 预设均未改动。这只是配置文本检查，尚未证明地图实际完整打包或加载成功。
+- 分支差异（本轮代码提交后）：`ew/zh-localization-next` 相对 `ew/loot-build-mvp` 超前129、落后0；相对 `master` 超前175、落后1。未合并、未修改 master。
+- 汉化模块进度：本轮无新增汉化；角色创建部分中文已修改，UI/HUD/NPC/任务/怪物/物品/武器/防具/技能/商店/制作/系统提示覆盖率仍未验证。
+- 构建测试：执行环境检查发现有 `java`，但无 `godot`/`godot4`、`sdkmanager`、`adb`。Godot 解析、自动化测试、Android APK 构建、实机断网验证均**未执行/未验证**；本轮没有 APK。
+- 阻塞：`Login.gd` 仍含 `OfflineAccountName`、`OfflineAccountPassword`、`Network.CreateAccount`、`Network.LoginWithPassword`；`Character.gd` 仍走 `Network.CreateCharacter`。隐藏账号并不是真正单机；本轮未触碰账号、网络或旧存档格式。
+- 下一步：在具备 Godot 4.7 与 Android SDK 的环境中验证导出资源与构建；随后集中处理不经过账号/网络 RPC 的本地角色创建、自动加载和保存，保留旧档兼容性。中文字体随 APK 实际资源一起验证。
