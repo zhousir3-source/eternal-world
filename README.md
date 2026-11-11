@@ -1,100 +1,38 @@
-# Source of Mana
+# Eternal World
 
-![screenshot](data/press/readme/header.png)
+Eternal World is a customized role-playing game project based on [Source of Mana](https://github.com/sourceofmana/sourceofmana), an open-source 2D MMORPG built with Godot 4.
 
-**Source of Mana** is a classic 2D MMORPG inspired by the golden era of pixel art RPGs. This game project is truly open source and welcomes contributions from around the globe.
+This repository keeps the upstream project history and adds a separate adaptation branch for a mobile-first, Chinese-localized RPG experience.
 
-The game is still in early development but already offers a playable solo and multiplayer experience.
+## Current development status
 
-## About the Project
+- Engine baseline: Godot 4.7 (as configured by the upstream project).
+- Target clients: Android first; Web export will be evaluated after the Android build is reproducible.
+- Current branch: `ew/mobile-first`.
+- Current milestone: project identity, mobile input audit, build and runtime verification.
+- This is an active development fork. A working Android APK has not yet been produced from this branch.
 
-**Engine:** Godot 4 (client and server)
+## Development principles
 
-**Design Tools:** (exact versions in [versions.cfg](versions.cfg))
-- Game editor: [Godot](https://godotengine.org/)
-- Level editor: [Tiled](https://www.mapeditor.org/)
+1. Preserve upstream functionality unless a change is required and tested.
+2. Keep custom work on the `ew/mobile-first` branch.
+3. Verify gameplay state changes, not just UI appearance.
+4. Test save/load compatibility whenever player data formats change.
+5. Do not mark a platform or feature complete until it has been built and tested on a real device.
 
-**Organization:** [Manasource](https://manasource.org)
+## Upstream and licensing
 
-**Origins:** We are veterans of *The Mana World*, building upon and improving its assets
+The upstream project is maintained by the Source of Mana contributors:
+- Upstream repository: https://github.com/sourceofmana/sourceofmana
+- Upstream project page: https://manasource.itch.io/source-of-mana
 
-**Goal:** Become the go-to open source 2D MMORPG project
+The upstream `LICENSE.md` describes MIT licensing for most code and CC BY-SA 4.0 licensing for artistic/design resources, with a resource attribution list. Check that file and each relevant asset's provenance before redistributing modified builds. Preserve required copyright notices, credits, and ShareAlike obligations.
 
-**Platforms:** Desktop (Windows, macOS, Linux), Mobile (Android) and Web (HTML5/WebAssembly) clients
+## Planned milestones
 
-## Gameplay Highlights
+- [ ] Verify Android export environment and produce a baseline debug APK.
+- [ ] Test virtual joystick, multi-touch action buttons, UI scaling, and touch interaction on a physical phone.
+- [ ] Localize the core login, character, HUD, inventory, equipment, skill, quest, and dialogue flows.
+- [ ] Audit gameplay systems and client/server authority before expanding RPG mechanics.
+- [ ] Add and test the Eternal World character, companion, equipment, loot, and progression content.
 
-- Explore a fantasy world crafted in charming pixel art
-- Interact with NPCs and other players in real-time
-- Battle monsters, complete quests, and collect loot
-- Dynamic server-authoritative design
-- Frequent updates and community-driven development
-
-## Screenshots
-
-![exploration](data/press/readme/exploration.png)
-![combat](data/press/readme/combat.png)
-![dialogue](data/press/readme/dialogue.png)
-
-## Controls
-
-### General Movement
-- **Move:** `WASD`
-- **Click to Move / Interact:** Left Mouse Button
-- **Interact:** `Ctrl`
-- **Target:** `E`
-- **Untarget:** `R`
-- **Run (Hold):** `Shift`
-- **Pickup Items:** `Q`
-- **Morph / Transformation:** `M`
-- **Sit:** `C`
-
-### Camera
-- **Zoom In / Out:** Mouse Scroll
-- **Reset Zoom:** Middle Mouse Button
-- **Screenshot:** `P`
-
-### UI Shortcuts (Keyboard Only)
-- **Menu Bar:** `F1`
-- **Open Stats:** `F2`
-- **Inventory:** `F3`
-- **Skills:** `F4`
-- **Quest Progress:** `F5`
-- **Minimap:** `F6`
-- **Chat:** `F7`
-- **Social:** `F8`
-- **Settings:** `F9`
-- **Toggle Fullscreen:** `F11`
-- **Emotes:** `F12`
-
-### Contextual Actions
-- **Confirm / Open Chat:** `Enter`
-- **Cancel / Close:** `Esc`
-- **Context Options:** `1`, `2`, `3`, `4`
-
-## Community & Contribution
-
-We’re always looking for contributors of all kinds:
-- Pixel artists
-- SFX makers
-- GDScript or general programmers
-- UI/UX designers
-- Writers and worldbuilders
-
-### Contact
-
-If you’re interested in helping, join our community and check out our open issues.
-
-- **Discord:** [Join here](https://discord.com/channels/581622549566193664/1013487216493854780)
-- **IRC:** `#sourceofmana` and `#sourceofmana-dev` on [Libera.Chat](https://web.libera.chat/#sourceofmana,#sourceofmana-dev)
-
-## License
-
-For detailed information on the licensing of code, assets, and design, as well as credits for individual asset files, please refer to the [LICENSE.md](LICENSE.md) file.
-
-- **Code License:** MIT License
-- **Art & Design License:** CC BY-SA 4.0
-
----
-
-Source of Mana is developed by volunteers in their free time. If you like retro RPGs & MMORPGs and want to help shape the future of open-source gaming, come say hi!
