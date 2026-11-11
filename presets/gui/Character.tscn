@@ -48,7 +48,9 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Display" type="HBoxContainer" parent="." unique_id=152549552]
+custom_minimum_size = Vector2(0, 320)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="EmptyLeft" type="Control" parent="Display" unique_id=1100581019]
 layout_mode = 2
@@ -56,8 +58,9 @@ size_flags_horizontal = 3
 
 [node name="Attributes" type="PanelContainer" parent="Display" unique_id=250347454]
 visible = false
+custom_minimum_size = Vector2(270, 300)
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 1
 theme_type_variation = &"PanelSideLeft"
 script = ExtResource("2_nrudd")
 
@@ -299,8 +302,9 @@ size_flags_horizontal = 3
 
 [node name="Traits" type="PanelContainer" parent="Display" unique_id=1685537274]
 visible = false
+custom_minimum_size = Vector2(270, 300)
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 1
 theme_type_variation = &"PanelSideRight"
 script = ExtResource("4_1wiqu")
 
