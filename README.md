@@ -1,38 +1,43 @@
-# Eternal World
+# 夏叶的异世界编年史
 
-Eternal World is a customized role-playing game project based on [Source of Mana](https://github.com/sourceofmana/sourceofmana), an open-source 2D MMORPG built with Godot 4.
+基于 Source of Mana（Godot 4）的原创单机 RPG 项目。上游项目仅作为经过授权核查后的技术底座；玩家可见的世界观、角色、地图、怪物、装备、技能、任务、对话和系统文案均以原创简体中文为目标。
 
-This repository keeps the upstream project history and adds a separate adaptation branch for a mobile-first, Chinese-localized RPG experience.
+## 当前开发基线
 
-## Current development status
+- GitHub：`zhousir3-source/eternal-world`
+- 引擎：Godot 4.7（以项目配置为准）
+- 当前工作分支：`ew/zh-localization-next`
+- 基础分支：`ew/loot-build-mvp`
+- 目标平台：Android 优先；Web 作为辅助构建目标。
+- 产品形态：纯单机、离线运行、本地存档；不需要账号、注册、密码、服务器选择、在线验证或云存档。
 
-- Engine baseline: Godot 4.7 (as configured by the upstream project).
-- Target clients: Android first; Web export will be evaluated after the Android build is reproducible.
-- Current branch: `ew/mobile-first`.
-- Current milestone: project identity, mobile input audit, build and runtime verification.
-- This is an active development fork. A working Android APK has not yet been produced from this branch.
+## 产品原则
 
-## Development principles
+1. 首次启动直接进入角色创建；已有本地存档则自动读取并继续游戏。
+2. 玩家可选择男性或女性角色；默认姓名为“夏叶”，允许修改姓名和基础外观。
+3. 玩家可见界面和游戏内容以简体中文呈现；内部 ID、资源路径和协议字段保持稳定。
+4. 角色、武器、怪物、装备、技能、NPC 和任务必须具备真实可操作机制，不能只做静态展示。
+5. 先完成创建角色—村庄—NPC—任务—探索—战斗—掉落—装备/使用—交易/制作—本地存档的可玩闭环。
+6. 全量内容库分阶段建设与接入，不把长期内容目标误当成首版一次性开发范围。
+7. 不直接修改 `master`；每轮开发先核对分支、提交、差异和现有实现。
+8. 不以代码提交替代构建，不以构建替代 Android 实机验收。
 
-1. Preserve upstream functionality unless a change is required and tested.
-2. Keep custom work on the `ew/mobile-first` branch.
-3. Verify gameplay state changes, not just UI appearance.
-4. Test save/load compatibility whenever player data formats change.
-5. Do not mark a platform or feature complete until it has been built and tested on a real device.
+## 当前已做的分支改动
 
-## Upstream and licensing
+- 角色创建、背包、角色属性等核心界面已有部分中文。
+- 本轮继续汉化冒险记录/任务日志/魔物图鉴、表情动作窗口、设置页提示文本和任务动态描述。
+- 设置页中的账号密码设置页签已隐藏；相关底层账号与网络认证代码尚未移除，不能宣称已经实现真正离线单机。
+- 游戏显示名称已改为“夏叶的异世界编年史”。
+- 当前主题默认字体为上游像素字体，中文字体覆盖与 Android/Web 字体打包仍待验证。
 
-The upstream project is maintained by the Source of Mana contributors:
-- Upstream repository: https://github.com/sourceofmana/sourceofmana
-- Upstream project page: https://manasource.itch.io/source-of-mana
+## 下一步
 
-The upstream `LICENSE.md` describes MIT licensing for most code and CC BY-SA 4.0 licensing for artistic/design resources, with a resource attribution list. Check that file and each relevant asset's provenance before redistributing modified builds. Preserve required copyright notices, credits, and ShareAlike obligations.
+1. 建立完整玩家可见文本扫描清单，继续汉化 HUD、菜单、NPC 对话、商店、技能、提示和数据内容。
+2. 解决简体中文字体覆盖、Android 字体打包与 Web 字体回退。
+3. 梳理启动、账号认证、服务器、角色创建、地图和存档的数据链路，移除账号依赖并建立真正的本地单机模式。
+4. 完成 Android 构建与实机测试，验证断网启动、保存和重新读取。
+5. 再逐步接入夏叶、莉娅、原创地图、魔物、装备和任务内容。
 
-## Planned milestones
+## 上游与许可
 
-- [ ] Verify Android export environment and produce a baseline debug APK.
-- [ ] Test virtual joystick, multi-touch action buttons, UI scaling, and touch interaction on a physical phone.
-- [ ] Localize the core login, character, HUD, inventory, equipment, skill, quest, and dialogue flows.
-- [ ] Audit gameplay systems and client/server authority before expanding RPG mechanics.
-- [ ] Add and test the Eternal World character, companion, equipment, loot, and progression content.
-
+上游项目：[Source of Mana](https://github.com/sourceofmana/sourceofmana)。代码、艺术资源和设计资源的许可可能不同；分发前必须逐项核查上游 LICENSE、资源来源和署名要求。
