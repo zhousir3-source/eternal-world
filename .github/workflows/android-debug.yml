@@ -68,7 +68,7 @@ jobs:
           mkdir -p data/graphics/fonts
           python3 - <<'PY'
           from fontTools.ttLib import TTCollection
-          collection = TTCollection('/usr/share/fonts/opentype/noto/NotoSansSC-Regular.ttf')
+          collection = TTCollection('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc')
           # Noto Sans CJK collection order: JP, KR, SC, TC, HK.
           font = collection.fonts[2]
           font.flavor = None
