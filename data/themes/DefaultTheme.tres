@@ -34,7 +34,7 @@
 [ext_resource type="FontFile" uid="uid://shxh5secawoq" path="res://data/graphics/fonts/alagard-16.ttf" id="18_v607h"]
 [ext_resource type="Texture2D" uid="uid://dvalh5n0jqur2" path="res://data/graphics/gui/panelsides.png" id="22_4trm7"]
 [ext_resource type="FontFile" uid="uid://bxtecswl0imti" path="res://data/graphics/fonts/romulus-16.ttf" id="22_e68kl"]
-[ext_resource type="FontFile" path="res://data/graphics/fonts/NotoSansCJK-Regular.ttc" id="31_cjk"]
+[ext_resource type="FontFile" path="res://data/graphics/fonts/NotoSansSC-Regular.ttf" id="31_cjk"]
 [ext_resource type="Texture2D" uid="uid://cm5pw0y8j157l" path="res://data/graphics/gui/window/window_bg.png" id="22_ovqsu"]
 [ext_resource type="Texture2D" uid="uid://ckqp851k875au" path="res://data/graphics/gui/split_bar.png" id="27_sv4ge"]
 [ext_resource type="Texture2D" uid="uid://ccnvk4w2d6iav" path="res://data/graphics/gui/split_background.png" id="28_44afm"]
