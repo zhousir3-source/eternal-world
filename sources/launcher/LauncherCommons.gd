@@ -2,7 +2,7 @@ extends RefCounted
 class_name LauncherCommons
 
 # Project
-const ProjectName : String				= "Source of Mana"
+const ProjectName : String				= "Eternal World"
 const DiscordInviteLink : String		= "https://discord.com/invite/qR6ursz7xD"
 const IRCLink : String					= "https://web.libera.chat/?channels=#sourceofmana"
 const ItchPageLink : String				= "https://manasource.itch.io/source-of-mana"
