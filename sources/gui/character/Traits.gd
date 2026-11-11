@@ -40,9 +40,16 @@ func GetValues():
 	var hairstyles : PackedInt64Array = DB.HairstylesDB.keys()
 	var haircolors : PackedInt64Array = DB.PalettesDB[DB.Palette.HAIR].keys()
 	var races : PackedInt64Array = DB.RacesDB.keys()
+	# An incomplete import must not index an empty resource list.
+	if hairstyleValue < 0 or hairstyleValue >= hairstyles.size() or haircolorValue < 0 or haircolorValue >= haircolors.size() or raceValue < 0 or raceValue >= races.size():
+		push_warning("Character appearance selection is unavailable.")
+		return {}
 	var race : RaceData = DB.GetRace(races[raceValue])
 	var skins : Dictionary[String, Material] = race.skins if race else {}
 	var skinsKeys : Array = skins.keys()
+	if skintoneValue < 0 or skintoneValue >= skinsKeys.size():
+		push_warning("Character skin tone selection is unavailable.")
+		return {}
 
 	return {
 		"hairstyle" = hairstyles[hairstyleValue],
