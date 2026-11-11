@@ -37,7 +37,7 @@ jobs:
       - name: Install system dependencies
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends libfontconfig1 unzip fonts-noto-cjk
+          apt-get install -y --no-install-recommends libfontconfig1 unzip fonts-noto-cjk python3-fonttools
           rm -rf /var/lib/apt/lists/*
 
       - name: Prepare Godot export templates
@@ -61,14 +61,21 @@ jobs:
           unzip -o ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/android_source.zip -d android/build
           echo "$BUILD_VERSION" > android/.build_version
 
-      - name: Install bundled Simplified Chinese font
+      - name: Extract Simplified Chinese font face
         run: |
-          FONT_SOURCE=/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc
+          FONT_SOURCE=/usr/share/fonts/opentype/noto/NotoSansSC-Regular.ttf
           test -s "$FONT_SOURCE"
           mkdir -p data/graphics/fonts
-          cp "$FONT_SOURCE" data/graphics/fonts/NotoSansCJK-Regular.ttc
-          test -s data/graphics/fonts/NotoSansCJK-Regular.ttc
-          ls -lh data/graphics/fonts/NotoSansCJK-Regular.ttc
+          python3 - <<'PY'
+          from fontTools.ttLib import TTCollection
+          collection = TTCollection('/usr/share/fonts/opentype/noto/NotoSansSC-Regular.ttf')
+          # Noto Sans CJK collection order: JP, KR, SC, TC, HK.
+          font = collection.fonts[2]
+          font.flavor = None
+          font.save('data/graphics/fonts/NotoSansSC-Regular.ttf')
+          PY
+          test -s data/graphics/fonts/NotoSansSC-Regular.ttf
+          ls -lh data/graphics/fonts/NotoSansSC-Regular.ttf
 
       - name: Import project assets
         run: godot --headless --editor --import --quit
@@ -80,7 +87,7 @@ jobs:
         run: |
           test -f data/graphics/fonts/alagard-16.ttf
           test -f data/graphics/fonts/romulus-16.ttf
-          test -s data/graphics/fonts/NotoSansCJK-Regular.ttc
+          test -s data/graphics/fonts/NotoSansSC-Regular.ttf
           grep -q 'default_font = ExtResource("31_cjk")' data/themes/DefaultTheme.tres
           echo "Bundled Noto CJK font is configured as the default UI font."
 
