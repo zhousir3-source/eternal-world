@@ -295,7 +295,7 @@ func EnableButtons(state : bool):
 				else:
 					Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "创建账号", EnableAccountCreator.bind(true))
 					Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.SECONDARY, "登录游戏", Connect)
-				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.TERTIARY, "Switch Online", SwitchOnlineMode.bind(onlineIndicator.button_pressed))
+				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.TERTIARY, "切换在线模式", SwitchOnlineMode.bind(onlineIndicator.button_pressed))
 				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "忘记密码", SetRecoveryState.bind(RecoveryState.REQUEST_EMAIL))
 				RefreshOnlineMode()
 			RefreshServerButtons()
