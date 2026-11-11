@@ -7,8 +7,8 @@
 script = ExtResource("1_script")
 slot = 11
 id = 1577372888
-name = "Thief's Key"
-description = "A tarnished key found in the snake pit."
+name = "盗贼的钥匙"
+description = "在蛇坑中发现的一把暗淡旧钥匙。"
 icon = ExtResource("1_epkb0")
 weight = 15.0
 stackable = true
