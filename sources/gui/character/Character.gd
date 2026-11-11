@@ -2,8 +2,8 @@ extends Control
 
 #
 @onready var characterName : PanelContainer				= $PlayerName
-@onready var characterNameLineEdit : LineEdit			= $PlayerName/Entry
-@onready var characterNameDisplay : Label				= $PlayerName/Name
+@onready var characterNameLineEdit : LineEdit			= $PlayerName/Fields/Entry
+@onready var characterNameDisplay : Label				= $PlayerName/Fields/Name
 
 @onready var display : HBoxContainer					= $Display
 @onready var traitsPanel : PanelContainer				= $Display/Traits
@@ -222,6 +222,9 @@ func UpdateSelectedCharacter(info : Dictionary, slotID : int):
 	var displayInformation : bool = not info.is_empty() or isCharacterCreatorEnabled
 	characterName.set_visible(displayInformation)
 	display.set_visible(displayInformation)
+	# Keep the nickname editor explicitly visible during creation; the display label is only for existing characters.
+	characterNameLineEdit.set_visible(isCharacterCreatorEnabled)
+	characterNameDisplay.set_visible(not isCharacterCreatorEnabled and not info.is_empty())
 
 	if not isCharacterCreatorEnabled and not info.is_empty():
 		statsPanel.SetInfo(info)
@@ -272,6 +275,7 @@ func EnableCharacterCreator(enable : bool):
 	statsPanel.set_visible(not enable and visible)
 	characterNameDisplay.set_visible(not enable and visible)
 	characterNameLineEdit.set_visible(enable)
+	characterName.set_visible(enable or (not enable and visible and not characterNameDisplay.text.is_empty()))
 	traitsPanel.set_visible(enable)
 	attributesPanel.set_visible(enable)
 
