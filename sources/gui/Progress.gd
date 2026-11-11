@@ -107,16 +107,16 @@ func RefreshQuestDescription(questID : int):
 		return
 
 	if not questData.description.is_empty():
-		questDescription.text += "Description:\n[color=#%s]%s[/color]\n\n" % [UICommons.TextColor.to_html(false), questData.description]
+		questDescription.text += "任务说明：\n[color=#%s]%s[/color]\n\n" % [UICommons.TextColor.to_html(false), questData.description]
 	if not questData.giver.is_empty():
-		questDescription.text += "Giver:\n[color=#%s]%s" % [UICommons.WarnTextColor.to_html(false), questData.giver]
+		questDescription.text += "委托人：\n[color=#%s]%s" % [UICommons.WarnTextColor.to_html(false), questData.giver]
 		if not questData.giverLocation.is_empty():
 			questDescription.text += " (%s)" % questData.giverLocation
 		questDescription.text += "[/color]\n\n"
 	if not questData.target.is_empty():
-		questDescription.text += "Target:\n[color=#%s]%s" % [UICommons.WarnTextColor.to_html(false), questData.target]
+		questDescription.text += "目标：\n[color=#%s]%s" % [UICommons.WarnTextColor.to_html(false), questData.target]
 		if not questData.targetLocation.is_empty():
 			questDescription.text += " (%s)" % questData.targetLocation
 		questDescription.text += "[/color]\n\n"
 	if not questData.reward.is_empty():
-		questDescription.text += "Reward:\n[color=#%s]%s[/color]\n\n" % [UICommons.WarnTextColor.to_html(false), questData.reward]
+		questDescription.text += "奖励：\n[color=#%s]%s[/color]\n\n" % [UICommons.WarnTextColor.to_html(false), questData.reward]
