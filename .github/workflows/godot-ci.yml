@@ -19,14 +19,6 @@ jobs:
       targets: Android,Web,Linux (Headless Server)
     secrets: inherit
 
-  snap:
-    needs: builds
-    uses: ./.github/workflows/snap.yml
-    with:
-      channel: edge
-      publish: ${{ github.ref == 'refs/heads/master' && !github.event.repository.fork }}
-    secrets: inherit
-
   itch:
     runs-on: ubuntu-latest
     needs: builds
