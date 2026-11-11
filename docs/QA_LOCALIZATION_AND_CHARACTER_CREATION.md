@@ -190,3 +190,15 @@
 - 构建环境检查：检测到 `java`，未检测到 `godot`/`godot4`、`sdkmanager`、`adb`。因此 Godot 解析、自动化测试、Android 构建、实机测试均未执行/未验证，未生成 APK。
 - 阻塞：隐藏账号、本地服务器和网络角色 RPC 仍存在；未实现真正无账号离线启动、本地角色创建、自动加载和手动/自动存档。中文字体随 APK 的实际覆盖未验证。
 - 下一步：优先在独立分支实现与账号/RPC 脱钩的本地角色数据读取与写入，再连接首次启动和存档自动读取；构建环境就绪后运行 Godot 和 Android 导出。
+
+## 2026-11-12 本轮：Android 客户端禁用在线更新器启动
+
+- 本轮范围：阻止 Android 单机目标客户端在启动时实例化原版 `UpdaterService`；保留桌面端原有行为，未改动账号、存档或网络协议。
+- 修改文件：`sources/launcher/Launcher.gd`；代码提交 `c3849fb76704e84d8448e92f4de22d690ed0f820`。
+- 变更：在 `UpdaterService.IsAvailable()` 判断前增加 `not LauncherCommons.isMobile`，避免 Android/iOS 移动端进入在线更新器初始化分支。此项仅关闭该启动入口，不能据此宣称已经完全离线。
+- 静态检查：重新读取 GitHub 代码并核对判断条件，文本检查通过。Godot 解析、自动化测试、APK 构建、实机运行和离线验收均未执行/未验证。
+- 构建环境：本轮 `command -v godot`、`sdkmanager`、`adb` 均未找到，无法执行 Godot 解析和 Android 构建；没有 APK。
+- 分支核查：本轮代码提交后相对 `ew/loot-build-mvp` 超前 133、落后 0；相对 `master` 超前 179、落后 1；未修改或合并 master。
+- 汉化进度：本轮未修改翻译；角色创建部分中文已改，UI/HUD/NPC/任务/怪物/物品/武器/防具/技能/商店/制作/系统提示完整覆盖率仍未验证。
+- 遗留阻塞：`Login.gd` 的隐藏账号自动创建/登录、`Network.CreateCharacter`、`Network.CharacterListing`、本地服务与持久化数据依赖仍在；真正无账号角色创建、本地自动/手动存档及旧档兼容验收尚未完成。中文字体随 APK 打包也未验证。
+- 下一步：优先实现不经过认证/RPC 的本地角色创建与读取存档切片；待有 Godot 4.7 与 Android SDK 构建环境后执行解析、自动化测试和 APK 导出。
