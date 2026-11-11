@@ -56,7 +56,9 @@ func Client():
 
 	add_child.call_deferred(Action)
 
-	if UpdaterService.IsAvailable():
+	# Android single-player builds must not start the online auto-updater.
+	# This does not remove the remaining local account/server dependencies.
+	if not LauncherCommons.isMobile and UpdaterService.IsAvailable():
 		Updater = UpdaterService.new()
 		add_child.call_deferred(Updater)
 
