@@ -14,6 +14,7 @@ on:
       - "**.svg"
       - "project.godot"
       - "export_presets.cfg"
+      - "export_presets.cfg"
       - "versions.cfg"
       - ".github/workflows/android-debug.yml"
 
@@ -71,7 +72,7 @@ jobs:
           GODOT_ANDROID_KEYSTORE_RELEASE_PASSWORD: android
         run: |
           mkdir -p build/android
-          godot --headless --export-debug "Android" build/android/Eternal-World-debug.apk
+          godot --headless --export-debug "Android" build/android/XiaYe-zh-preview-debug.apk
 
       - name: Verify APK exists
         run: |
@@ -83,7 +84,7 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v5
         with:
-          name: Eternal-World-Android-Debug
+          name: XiaYe-ZH-Preview-Android-Debug
           path: build/android/Eternal-World-debug.apk
           if-no-files-found: error
           retention-days: 14
