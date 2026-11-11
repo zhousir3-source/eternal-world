@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Eternal World"
+config/name="夏叶的异世界编年史"
 config/version="0.0.9"
 run/main_scene="res://presets/Default.tscn"
 config/use_custom_user_dir=true
