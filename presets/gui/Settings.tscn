@@ -336,7 +336,7 @@ text = " 当前密码"
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Type your current password so we know it is really you."
+tooltip_text = "请输入当前密码以验证身份。"
 secret = true
 
 [node name="NewPassword" type="HBoxContainer" parent="Layout/Margin/TabBar/Account/AccountVBox" unique_id=1828967856]
@@ -351,7 +351,7 @@ text = " 新密码"
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Type the new password you want to use from now on."
+tooltip_text = "请输入要设置的新密码。"
 secret = true
 
 [node name="ConfirmPassword" type="HBoxContainer" parent="Layout/Margin/TabBar/Account/AccountVBox" unique_id=1523694092]
@@ -366,12 +366,12 @@ text = " 确认密码"
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "Type your new password again so it can be checked for typos."
+tooltip_text = "请再次输入新密码，确认两次输入一致。"
 secret = true
 
 [node name="ChangeButton" type="Button" parent="Layout/Margin/TabBar/Account/AccountVBox" unique_id=1463781895]
 layout_mode = 2
-tooltip_text = "Saves your new password."
+tooltip_text = "保存并修改密码。"
 text = "修改密码"
 
 [node name="StatusLabel" type="RichTextLabel" parent="Layout/Margin/TabBar/Account/AccountVBox" unique_id=1960191140]
