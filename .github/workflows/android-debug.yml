@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - ew/mobile-first
+      - ew/zh-localization-next
     paths:
       - "**.gd"
       - "**.tscn"
