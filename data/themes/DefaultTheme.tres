@@ -34,6 +34,7 @@
 [ext_resource type="FontFile" uid="uid://shxh5secawoq" path="res://data/graphics/fonts/alagard-16.ttf" id="18_v607h"]
 [ext_resource type="Texture2D" uid="uid://dvalh5n0jqur2" path="res://data/graphics/gui/panelsides.png" id="22_4trm7"]
 [ext_resource type="FontFile" uid="uid://bxtecswl0imti" path="res://data/graphics/fonts/romulus-16.ttf" id="22_e68kl"]
+[ext_resource type="FontFile" path="res://data/graphics/fonts/NotoSansCJK-Regular.ttc" id="31_cjk"]
 [ext_resource type="Texture2D" uid="uid://cm5pw0y8j157l" path="res://data/graphics/gui/window/window_bg.png" id="22_ovqsu"]
 [ext_resource type="Texture2D" uid="uid://ckqp851k875au" path="res://data/graphics/gui/split_bar.png" id="27_sv4ge"]
 [ext_resource type="Texture2D" uid="uid://ccnvk4w2d6iav" path="res://data/graphics/gui/split_background.png" id="28_44afm"]
@@ -552,7 +553,7 @@ texture = ExtResource("13_qal60")
 texture = ExtResource("13_ovqsu")
 
 [resource]
-default_font = ExtResource("18_v607h")
+default_font = ExtResource("31_cjk")
 Button/colors/font_color = Color(0.933, 0.847, 0.631, 1)
 Button/colors/font_color_disabled = Color(0.619608, 0.619608, 0.619608, 1)
 Button/colors/font_color_focus = Color(0.933, 0.847, 0.631, 1)
@@ -672,7 +673,7 @@ PopupPanel/styles/panel = SubResource("StyleBoxTexture_ik3rj")
 SettingsLabel/base_type = &"Label"
 SettingsLabel/styles/normal = SubResource("StyleBoxEmpty_settingslabel")
 SmallLabel/base_type = &"Label"
-SmallLabel/fonts/font = ExtResource("22_e68kl")
+SmallLabel/fonts/font = ExtResource("31_cjk")
 TabBar/colors/drop_mark_color = Color(0.933, 0.847, 0.631, 1)
 TabBar/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 TabBar/colors/font_hovered_color = Color(0.933, 0.847, 0.631, 1)
