@@ -128,7 +128,7 @@ func FillWarningLabel(err : NetworkCommons.AuthError):
 			isWarn = false
 			SetRecoveryState(RecoveryState.NONE)
 		_:
-			warn = "Could not connect to the server (Error %d).\nPlease contact us via our [url=%s][color=#%s]Discord server[/color][/url].\nMeanwhile be sure to test the offline mode!" % [err, LauncherCommons.DiscordInviteLink, UICommons.WarnTextColor]
+			warn = "无法连接服务器（错误代码：%d）。\n请通过 [url=%s][color=#%s]Discord 社区[/color][/url] 联系我们，也可以先尝试离线模式。" % [err, LauncherCommons.DiscordInviteLink, UICommons.WarnTextColor]
 
 	var textColor : Color = UICommons.WarnTextColor if isWarn else UICommons.TextColor
 
