@@ -7,8 +7,8 @@
 script = ExtResource("2_script")
 slot = 11
 id = 0
-name = "Brass Zielite Amulet"
-description = "A Zielite Amulet with a brass setting and chain. The stone slightly glows, showing the natural flow of Mana around it."
+name = "黄铜泽利特护身符"
+description = "一枚镶嵌在黄铜底座并配有链条的泽利特护身符。宝石微微发光，映照出周围魔力的自然流动。"
 icon = ExtResource("1_icon")
 weight = 50.0
 metadata/enables_magic = true
