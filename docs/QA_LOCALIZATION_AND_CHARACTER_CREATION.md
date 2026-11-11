@@ -214,3 +214,15 @@
 - 兼容性：未更改账号、网络协议、角色创建、旧档格式或游戏内容。
 - 阻塞：真正无账号本地角色创建、自动/手动存档、离线运行尚未完成；中文字体实际 Android 显示和 CI 容器中的 TTC 名称匹配尚未通过运行验证。
 - 下一步：优先验证 GitHub Actions Android 工作流运行结果；若字体提取失败，依据真实日志修复。随后集中实现本地角色创建、自动加载及存档闭环。
+
+## 2026-11-12 本轮：修复 Android CI 导出模板准备步骤
+
+- 范围：Android Debug APK 工作流此前在容器内执行 `cp -r /root/.config/godot ~/.config/godot`，并将 `/root/.local/share/godot/export_templates/4.7.1.stable` 复制到同一路径。这是源与目标相同的复制操作，可能使步骤提前失败，无法进入字体检查和 Godot 导出。
+- 修改文件：`.github/workflows/android-debug.yml`；代码提交 `90f00e913b067b5e4208be6dc8c51b775cf58e29`。
+- 修改：删除两条源目标相同的复制命令；改为打印 Godot 版本，验证模板目录、`android_source.zip` 和 `android_debug.apk` 是否存在。模板缺失则明确失败，不伪造模板或成功结果。
+- 分支核查：代码提交后相对 `ew/loot-build-mvp` 超前 137、落后 0；相对 `master` 超前 183、落后 1。仅提交到 `ew/zh-localization-next`，未修改或合并 master。
+- 静态检查：GitHub 重新读取后确认原错误复制命令已移除、模板检查命令存在；文本检查通过。完整 YAML 解析、Godot 项目解析、自动化测试、GitHub Actions 实际构建及 Android 实机运行未验证。
+- 构建状态：本轮执行容器中未找到 `godot`、`sdkmanager`、`adb`；该提交的 GitHub combined status 未返回状态检查。未生成 APK。
+- 汉化模块进度：本轮仅修复构建流水线；UI/HUD、NPC、任务、怪物、物品、武器、防具、技能、商店、制作及系统提示全量汉化比例未验证；中文字体随 APK 的覆盖仍未验证。
+- 剩余工作与阻塞：CI 容器是否实际提供上述 Godot 4.7.1 模板、Android SDK 和导出环境尚未验证；真正无账号/无 RPC 的本地角色创建、自动读取、自动/手动存档尚未实现。不能把当前隐藏本地账号方案认定为离线单机。
+- 下一步：读取 GitHub Actions 真实日志，确认模板目录与字体步骤能执行；随后优先实现独立于账号和网络 RPC 的本地角色数据创建/读取切片，不改旧档格式。
