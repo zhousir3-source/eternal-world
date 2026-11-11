@@ -28,7 +28,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 1
-titleText = "Settings"
+titleText = "设置"
 
 [node name="Margin" type="MarginContainer" parent="Layout" unique_id=1944769664]
 custom_minimum_size = Vector2(0, 1)
@@ -63,7 +63,7 @@ size_flags_vertical = 10
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Render/RenderVBox/Preset" unique_id=1331934713]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Preset"
+text = "预设方案"
 
 [node name="Option" type="OptionButton" parent="Layout/Margin/TabBar/Render/RenderVBox/Preset" unique_id=1281262132]
 texture_filter = 1
@@ -71,9 +71,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
 item_count = 2
-popup/item_0/text = "PC"
+popup/item_0/text = "电脑"
 popup/item_0/id = 0
-popup/item_1/text = "Mobile"
+popup/item_1/text = "手机"
 popup/item_1/id = 1
 
 [node name="VisualVBox" type="VBoxContainer" parent="Layout/Margin/TabBar/Render/RenderVBox" unique_id=1244674521]
@@ -81,12 +81,12 @@ layout_mode = 2
 
 [node name="Visual" type="Label" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox" unique_id=355890167]
 layout_mode = 2
-text = "Visual"
+text = "画面"
 
 [node name="Fullscreen" type="CheckButton" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox" unique_id=334337584]
 layout_mode = 2
-tooltip_text = "Makes the game fill your whole screen."
-text = "Fullscreen Mode"
+tooltip_text = "让游戏占满整个屏幕。"
+text = "全屏模式"
 
 [node name="WindowResolution" type="HBoxContainer" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox" unique_id=1027751738]
 layout_mode = 2
@@ -95,7 +95,7 @@ size_flags_vertical = 10
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox/WindowResolution" unique_id=1003187559]
 layout_mode = 2
 size_flags_horizontal = 3
-text = " Window Resolution"
+text = "窗口分辨率"
 
 [node name="Option" type="OptionButton" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox/WindowResolution" unique_id=745099495]
 texture_filter = 1
@@ -110,7 +110,7 @@ size_flags_vertical = 10
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox/Scaling" unique_id=1899750434]
 layout_mode = 2
 size_flags_horizontal = 3
-text = " Scaling"
+text = "画面缩放"
 
 [node name="Option" type="OptionButton" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox/Scaling" unique_id=815910694]
 texture_filter = 1
@@ -129,12 +129,12 @@ popup/item_2/id = 2
 [node name="ActionOverlay" type="CheckButton" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox" unique_id=1637200902]
 layout_mode = 2
 tooltip_text = "Shows touch buttons on screen for movement and actions."
-text = "Action Overlay"
+text = "操作按钮显示"
 
 [node name="ResetWindows" type="Button" parent="Layout/Margin/TabBar/Render/RenderVBox/VisualVBox" unique_id=1637200903]
 layout_mode = 2
 tooltip_text = "Resets all game windows to their default size and position."
-text = "Reset Window Layout"
+text = "重置窗口布局"
 
 [node name="HSeparator2" type="HSeparator" parent="Layout/Margin/TabBar/Render/RenderVBox" unique_id=186324792]
 layout_mode = 2
@@ -144,22 +144,22 @@ layout_mode = 2
 
 [node name="Effect" type="Label" parent="Layout/Margin/TabBar/Render/RenderVBox/EffectVBox" unique_id=1300611624]
 layout_mode = 2
-text = "Effect"
+text = "特效"
 
 [node name="Lighting" type="CheckButton" parent="Layout/Margin/TabBar/Render/RenderVBox/EffectVBox" unique_id=392747916]
 layout_mode = 2
 tooltip_text = "Turns on dynamic lights and shadows."
-text = "Lighting"
+text = "光照"
 
 [node name="HQx4" type="CheckButton" parent="Layout/Margin/TabBar/Render/RenderVBox/EffectVBox" unique_id=787563390]
 layout_mode = 2
 tooltip_text = "Smooths the image when the view is scaled up."
-text = "High Quality Scale"
+text = "高质量缩放"
 
 [node name="CRT" type="CheckButton" parent="Layout/Margin/TabBar/Render/RenderVBox/EffectVBox" unique_id=307353882]
 layout_mode = 2
 tooltip_text = "Adds an old television screen look."
-text = "Cathode Ray Tube"
+text = "复古显像效果"
 
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Render/RenderVBox" unique_id=1915786938]
 layout_mode = 2
@@ -178,7 +178,7 @@ layout_mode = 2
 
 [node name="Volume" type="Label" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox" unique_id=201837482]
 layout_mode = 2
-text = "Volume"
+text = "音量"
 
 [node name="Global" type="HBoxContainer" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox" unique_id=508225996]
 layout_mode = 2
@@ -189,7 +189,7 @@ tooltip_text = "Sets the volume of every sound in the game at once."
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"SettingsLabel"
-text = "Global"
+text = "总音量"
 
 [node name="HSlider" type="HSlider" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/Global" unique_id=1319659749]
 layout_mode = 2
@@ -208,7 +208,7 @@ tooltip_text = "Sets the volume of the background music."
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"SettingsLabel"
-text = "Music"
+text = "音乐"
 
 [node name="HSlider" type="HSlider" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/Music" unique_id=201837473]
 layout_mode = 2
@@ -227,7 +227,7 @@ tooltip_text = "Sets the volume of combat feedback like hits, crits, dodges and 
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"SettingsLabel"
-text = "Combat"
+text = "战斗"
 
 [node name="HSlider" type="HSlider" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/Alteration SFX" unique_id=201837467]
 layout_mode = 2
@@ -246,7 +246,7 @@ tooltip_text = "Sets the volume of alerts meant for you: whispers, level ups, sk
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"SettingsLabel"
-text = "Alerts"
+text = "提醒"
 
 [node name="HSlider" type="HSlider" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/Notification SFX" unique_id=201837476]
 layout_mode = 2
@@ -265,7 +265,7 @@ tooltip_text = "Sets the volume of creatures and surrounding objects: attacks, d
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"SettingsLabel"
-text = "Creatures & Objects"
+text = "生物与物体"
 
 [node name="HSlider" type="HSlider" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/State SFX" unique_id=201837470]
 layout_mode = 2
@@ -284,7 +284,7 @@ tooltip_text = "Sets the volume of fights you are not part of. Your own actions 
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"SettingsLabel"
-text = "Other Fights"
+text = "其他战斗"
 
 [node name="HSlider" type="HSlider" parent="Layout/Margin/TabBar/Audio/VBoxContainer/VolumeVBox/Other Entities" unique_id=201837479]
 layout_mode = 2
@@ -300,7 +300,7 @@ layout_mode = 2
 [node name="MuteUnfocused" type="CheckButton" parent="Layout/Margin/TabBar/Audio/VBoxContainer" unique_id=201837480]
 layout_mode = 2
 tooltip_text = "Silences the game while its window is in the background."
-text = "Mute When Unfocused"
+text = "切换窗口时静音"
 
 [node name="Input" type="TabContainer" parent="Layout/Margin/TabBar" unique_id=753213710]
 visible = false
@@ -322,7 +322,7 @@ theme_override_constants/separation = 10
 
 [node name="PasswordLabel" type="Label" parent="Layout/Margin/TabBar/Account/AccountVBox" unique_id=453651108]
 layout_mode = 2
-text = "Change Password"
+text = "修改密码"
 
 [node name="CurrentPassword" type="HBoxContainer" parent="Layout/Margin/TabBar/Account/AccountVBox" unique_id=763886695]
 layout_mode = 2
@@ -330,7 +330,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Account/AccountVBox/CurrentPassword" unique_id=1792890057]
 layout_mode = 2
 size_flags_horizontal = 3
-text = " Current Password"
+text = " 当前密码"
 
 [node name="Text" type="LineEdit" parent="Layout/Margin/TabBar/Account/AccountVBox/CurrentPassword" unique_id=895317565]
 texture_filter = 1
@@ -345,7 +345,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Account/AccountVBox/NewPassword" unique_id=1074344070]
 layout_mode = 2
 size_flags_horizontal = 3
-text = " New Password"
+text = " 新密码"
 
 [node name="Text" type="LineEdit" parent="Layout/Margin/TabBar/Account/AccountVBox/NewPassword" unique_id=628449545]
 texture_filter = 1
@@ -360,7 +360,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="Layout/Margin/TabBar/Account/AccountVBox/ConfirmPassword" unique_id=1467792528]
 layout_mode = 2
 size_flags_horizontal = 3
-text = " Confirm Password"
+text = " 确认密码"
 
 [node name="Text" type="LineEdit" parent="Layout/Margin/TabBar/Account/AccountVBox/ConfirmPassword" unique_id=986277347]
 texture_filter = 1
@@ -372,7 +372,7 @@ secret = true
 [node name="ChangeButton" type="Button" parent="Layout/Margin/TabBar/Account/AccountVBox" unique_id=1463781895]
 layout_mode = 2
 tooltip_text = "Saves your new password."
-text = "Change Password"
+text = "修改密码"
 
 [node name="StatusLabel" type="RichTextLabel" parent="Layout/Margin/TabBar/Account/AccountVBox" unique_id=1960191140]
 layout_mode = 2
@@ -394,12 +394,12 @@ theme_override_constants/separation = 10
 [node name="BugReports" type="CheckButton" parent="Layout/Margin/TabBar/Privacy/PrivacyVBox" unique_id=860000013]
 layout_mode = 2
 tooltip_text = "Sends anonymous crash and error reports to help fix bugs. No personal data is collected."
-text = "Bug Reports"
+text = "问题反馈"
 
 [node name="LocalServer" type="CheckButton" parent="Layout/Margin/TabBar/Privacy/PrivacyVBox" unique_id=860000014]
 layout_mode = 2
 tooltip_text = "Connects to a dedicated server running on this machine (127.0.0.1) instead of the public server."
-text = "★ Local Server"
+text = "★ 本地服务器"
 
 [node name="Credits" type="ScrollContainer" parent="Layout/Margin/TabBar" unique_id=850000001]
 visible = false
