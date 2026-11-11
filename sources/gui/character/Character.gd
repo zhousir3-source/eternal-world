@@ -199,7 +199,11 @@ func CreateCharacter():
 		if err != NetworkCommons.CharacterError.ERR_OK:
 			FillWarningLabel(err)
 		else:
-			if Network.CreateCharacter(nickname, traitsPanel.GetValues(), attributesPanel.GetValues()):
+			var appearance : Dictionary = traitsPanel.GetValues()
+			if appearance.is_empty():
+				Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]角色外观资源未加载完整，请检查游戏资源后重试。[/color]")
+				return
+			if Network.CreateCharacter(nickname, appearance, attributesPanel.GetValues()):
 				FSM.EnterState(FSM.States.CHAR_PROGRESS)
 
 func SelectCharacter():
