@@ -37,7 +37,7 @@ jobs:
       - name: Install system dependencies
         run: |
           apt-get update
-          apt-get install -y --no-install-recommends libfontconfig1 unzip
+          apt-get install -y --no-install-recommends libfontconfig1 unzip fonts-noto-cjk
           rm -rf /var/lib/apt/lists/*
 
       - name: Prepare Godot export templates
@@ -61,6 +61,15 @@ jobs:
           unzip -o ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/android_source.zip -d android/build
           echo "$BUILD_VERSION" > android/.build_version
 
+      - name: Install bundled Simplified Chinese font
+        run: |
+          FONT_SOURCE=/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc
+          test -s "$FONT_SOURCE"
+          mkdir -p data/graphics/fonts
+          cp "$FONT_SOURCE" data/graphics/fonts/NotoSansCJK-Regular.ttc
+          test -s data/graphics/fonts/NotoSansCJK-Regular.ttc
+          ls -lh data/graphics/fonts/NotoSansCJK-Regular.ttc
+
       - name: Import project assets
         run: godot --headless --editor --import --quit
 
@@ -71,8 +80,9 @@ jobs:
         run: |
           test -f data/graphics/fonts/alagard-16.ttf
           test -f data/graphics/fonts/romulus-16.ttf
-          grep -q 'default_font = ExtResource("18_v607h")' data/themes/DefaultTheme.tres
-          echo "Font files exist; CJK glyph coverage still requires runtime validation."
+          test -s data/graphics/fonts/NotoSansCJK-Regular.ttc
+          grep -q 'default_font = ExtResource("31_cjk")' data/themes/DefaultTheme.tres
+          echo "Bundled Noto CJK font is configured as the default UI font."
 
       - name: Export APK
         env:
