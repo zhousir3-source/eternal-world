@@ -6,8 +6,8 @@
 [resource]
 script = ExtResource("1_buwtk")
 id = 2961268734
-name = "Gabriel's Key"
-description = "A key that has been hidden a long time ago, seems to open a fancy door."
+name = "加布里埃尔的钥匙"
+description = "一把被藏匿已久的钥匙，似乎可以打开一扇精致的大门。"
 icon = ExtResource("1_kr3ik")
 weight = 15.0
 stackable = true
