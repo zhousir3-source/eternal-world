@@ -110,6 +110,9 @@ const ServerCertPath : String			= "user://server.crt"
 # Auth
 const PlayerNameMinSize : int			= 3
 const PlayerNameMaxSize : int			= 30
+const CharacterNicknameMinSize : int	= 2
+const CharacterNicknameMaxSize : int	= 30
+const CharacterNicknameValidRegex : String = "^[\\\\p{L}\\\\p{N}_#!@%&:;<>,\\\\$\\\\^*\\\\(\\\\)_+=\\\\{\\\\}\\\\[\\\\]\\\\.\\\\?/-]+$"
 const PasswordMinSize : int				= 6
 const PasswordMaxSize : int				= 128
 const EntryValidRegex : String			= "^[\\w#!@%&:;<>,\\$\\^*\\(\\)_+=\\{\\}\\[\\]\\.?/-]+$"
@@ -256,8 +259,10 @@ enum CharacterError {
 }
 
 static func CheckCharacterInformation(nickText : String) -> CharacterError:
-	if not CheckSize(nickText, PlayerNameMinSize, PlayerNameMaxSize):
+	# Character nicknames are game display names, not account identifiers.
+	# Accept Unicode letters/numbers so the default Chinese name "夏叶" is valid.
+	if not CheckSize(nickText, CharacterNicknameMinSize, CharacterNicknameMaxSize):
 		return CharacterError.ERR_NAME_SIZE
-	elif not CheckValid(nickText, EntryValidRegex):
+	elif not CheckValid(nickText, CharacterNicknameValidRegex):
 		return CharacterError.ERR_NAME_VALID
 	return CharacterError.ERR_OK
