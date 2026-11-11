@@ -71,6 +71,10 @@ jobs:
           collection = TTCollection('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc')
           # Noto Sans CJK collection order: JP, KR, SC, TC, HK.
           font = collection.fonts[2]
+          family_names = {record.toUnicode() for record in font['name'].names if record.nameID in (1, 4, 6)}
+          print('Extracted font names:', sorted(family_names))
+          if not any('SC' in name.upper() for name in family_names):
+              raise SystemExit('Selected TTC face is not the Simplified Chinese (SC) font.')
           font.flavor = None
           font.save('data/graphics/fonts/NotoSansSC-Regular.ttf')
           PY
