@@ -188,9 +188,10 @@ func EnterLoginMenu():
 	buttonBoxes.set_visible(false)
 
 	background.set_visible(true)
-	loginPanel.set_visible(true)
-	loginPanel.RefreshOnce()
-	buttonBoxes.set_visible(true)
+	loginPanel.set_visible(false)
+	buttonBoxes.set_visible(false)
+	loadingControl.set_visible(true)
+	loginPanel.StartOfflineAdventure()
 
 func EnterLoginProgress():
 	loginPanel.set_visible(false)
