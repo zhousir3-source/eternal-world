@@ -147,7 +147,7 @@ func Randomize():
 	RefreshHairstyle()
 	haircolorValue = randi() % haircolorsCount
 	RefreshHaircolor()
-	genderValue = ActorCommons.Gender.MALE
+	# Keep the player's explicit male/female selection when changing appearance.
 	RefreshGender()
 	raceValue = randi() % raceCount
 	RefreshRace()
