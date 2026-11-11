@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("2_6b5vw")
 slot = 11
-name = "Heavy Envelope"
-description = "A heavy envelope that feels like it contains more than just paper."
+name = "厚重信封"
+description = "一个沉甸甸的信封，里面似乎不只有纸张。"
 icon = ExtResource("1_jk2eh")
 weight = 25.0
