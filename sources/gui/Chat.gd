@@ -171,11 +171,11 @@ func _ready():
 	for channelIdx in GUICommons.ChatChannel.DEFAULT_CHANNEL_COUNT:
 		channelTabs[str(channelIdx)] = channelIdx
 
-	AddLocalFeedback("Welcome to " + LauncherCommons.ProjectName)
+	AddLocalFeedback("欢迎来到《夏叶的异世界编年史》！")
 	var linkColor : String = "[color=#" + UICommons.WarnTextColor.to_html(false) + "]"
 	var discordLink : String = linkColor + "[url=" + LauncherCommons.DiscordInviteLink + "]Discord[/url][/color]"
 	var ircLink : String = linkColor + "[url=" + LauncherCommons.IRCLink + "]IRC[/url][/color]"
-	AddGlobalFeedback("Messages sent here are publicly bridged to our " + discordLink + " and " + ircLink + " channels.")
+	AddGlobalFeedback("在此发送的消息会同步公开到我们的 " + discordLink + " 和 " + ircLink + " 频道。")
 
 	SetNewLineEnabled(false)
 
