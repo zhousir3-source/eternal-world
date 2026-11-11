@@ -83,48 +83,48 @@ func FillWarningLabel(err : NetworkCommons.AuthError):
 		NetworkCommons.AuthError.ERR_OK:
 			warn = ""
 		NetworkCommons.AuthError.ERR_TOKEN:
-			warn = "Invalid token, enter your password"
+			warn = "登录凭证已失效，请输入密码。"
 			passwordTextControl.clear()
 			ClearSavedToken()
 			RequestFocus(passwordTextControl)
 		NetworkCommons.AuthError.ERR_DUPLICATE_CONNECTION:
-			warn = "Another connection happened with the same login."
+			warn = "该账号已在其他设备登录。"
 		NetworkCommons.AuthError.ERR_AUTH:
-			warn = "Invalid account name or password."
+			warn = "账号名称或密码错误。"
 			RequestFocus(passwordTextControl)
 		NetworkCommons.AuthError.ERR_PASSWORD_VALID:
-			warn = "Password should not include control characters such as tabs or line breaks."
+			warn = "密码不能包含制表符或换行符。"
 			RequestFocus(passwordTextControl)
 		NetworkCommons.AuthError.ERR_PASSWORD_SIZE:
-			warn = "Password length should be inbetween %d and %d character long." % [NetworkCommons.PasswordMinSize, NetworkCommons.PasswordMaxSize]
+			warn = "密码长度必须为%d至%d个字符。" % [NetworkCommons.PasswordMinSize, NetworkCommons.PasswordMaxSize]
 			RequestFocus(passwordTextControl)
 		NetworkCommons.AuthError.ERR_NAME_AVAILABLE:
-			warn = "Account name not available."
+			warn = "该账号名称不可用。"
 			RequestFocus(nameTextControl)
 		NetworkCommons.AuthError.ERR_NAME_VALID:
-			warn = "Name should should only include alpha-numeric characters and symbols."
+			warn = "名称只能包含字母、数字和允许使用的符号。"
 			RequestFocus(nameTextControl)
 		NetworkCommons.AuthError.ERR_NAME_SIZE:
-			warn = "Name length should be inbetween %d and %d character long." % [NetworkCommons.PlayerNameMinSize, NetworkCommons.PlayerNameMaxSize]
+			warn = "名称长度必须为%d至%d个字符。" % [NetworkCommons.PlayerNameMinSize, NetworkCommons.PlayerNameMaxSize]
 			RequestFocus(nameTextControl)
 		NetworkCommons.AuthError.ERR_PASSWORD_MISMATCH:
-			warn = "Passwords do not match."
+			warn = "两次输入的密码不一致。"
 			RequestFocus(confirmPasswordTextControl)
 		NetworkCommons.AuthError.ERR_EMAIL_VALID:
-			warn = "Email is incorrect, please us a normal email format."
+			warn = "邮箱格式不正确，请检查后重试。"
 			RequestFocus(emailTextControl)
 		NetworkCommons.AuthError.ERR_RESET_UNAVAILABLE:
-			warn = "Password reset is not available on this server."
+			warn = "当前服务器暂不支持密码重置。"
 			SetRecoveryState(RecoveryState.NONE)
 		NetworkCommons.AuthError.ERR_RESET_EMAIL_SENT:
-			warn = "If this email is registered, a reset code has been sent. Check your inbox."
+			warn = "如果该邮箱已注册，验证码已发送，请检查收件箱。"
 			isWarn = false
 			SetRecoveryState(RecoveryState.ENTER_CODE)
 		NetworkCommons.AuthError.ERR_RESET_INVALID_CODE:
-			warn = "Invalid or expired reset code."
+			warn = "验证码无效或已过期。"
 			RequestFocus(resetCodeTextControl)
 		NetworkCommons.AuthError.ERR_RESET_PASSWORD_UPDATED:
-			warn = "Password updated successfully. You can now log in."
+			warn = "密码修改成功，请重新登录。"
 			isWarn = false
 			SetRecoveryState(RecoveryState.NONE)
 		_:
@@ -160,7 +160,7 @@ func RefreshControls():
 	news.set_visible(not isAccountCreatorEnabled and not isRecovering)
 	agreement.set_visible(isAccountCreatorEnabled)
 
-	passwordLabel.text = "New Password" if enteringCode else "Password"
+	passwordLabel.text = "新密码" if enteringCode else "密码"
 	passwordTextControl.secret = true
 
 	SetPanelExpand(not isRecovering)
@@ -269,8 +269,8 @@ func RefreshOnlineMode():
 
 func OnlineMode(_clientStarted : bool, serverStarted : bool):
 	if onlineIndicator:
-		Launcher.GUI.buttonBoxes.Rename(UICommons.ButtonBox.TERTIARY, "Switch Online" if serverStarted else "Switch Offline")
-		onlineIndicator.text = "Playing Offline" if serverStarted else "Playing Online"
+		Launcher.GUI.buttonBoxes.Rename(UICommons.ButtonBox.TERTIARY, "切换至在线模式" if serverStarted else "切换至离线模式")
+		onlineIndicator.text = "当前为离线模式" if serverStarted else "当前为在线模式"
 		if onlineIndicator.button_pressed != not serverStarted:
 			onlineIndicator.button_pressed = not serverStarted
 
@@ -279,28 +279,28 @@ func EnableButtons(state : bool):
 		Launcher.GUI.buttonBoxes.ClearAll()
 		if state:
 			if recoveryState == RecoveryState.REQUEST_EMAIL:
-				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "Send Code", RequestReset)
-				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "Cancel", SetRecoveryState.bind(RecoveryState.NONE))
+				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "发送验证码", RequestReset)
+				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "取消", SetRecoveryState.bind(RecoveryState.NONE))
 			elif recoveryState == RecoveryState.ENTER_CODE:
-				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "Reset Password", ConfirmReset)
-				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "Cancel", SetRecoveryState.bind(RecoveryState.NONE))
+				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "重置密码", ConfirmReset)
+				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "取消", SetRecoveryState.bind(RecoveryState.NONE))
 			elif isAccountCreatorEnabled:
-				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "Create", CreateAccount)
-				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "Cancel", EnableAccountCreator.bind(false))
+				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "创建账号", CreateAccount)
+				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "取消", EnableAccountCreator.bind(false))
 			else:
 				isConnectPrimary = IsConnectPreferred()
 				if isConnectPrimary:
-					Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "Connect", Connect)
-					Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.SECONDARY, "Create Account", EnableAccountCreator.bind(true))
+					Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "登录游戏", Connect)
+					Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.SECONDARY, "创建账号", EnableAccountCreator.bind(true))
 				else:
-					Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "Create Account", EnableAccountCreator.bind(true))
-					Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.SECONDARY, "Connect", Connect)
+					Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "创建账号", EnableAccountCreator.bind(true))
+					Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.SECONDARY, "登录游戏", Connect)
 				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.TERTIARY, "Switch Online", SwitchOnlineMode.bind(onlineIndicator.button_pressed))
-				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "Forgot Password", SetRecoveryState.bind(RecoveryState.REQUEST_EMAIL))
+				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "忘记密码", SetRecoveryState.bind(RecoveryState.REQUEST_EMAIL))
 				RefreshOnlineMode()
 			RefreshServerButtons()
 		else:
-			onlineIndicator.text = "Connecting..."
+			onlineIndicator.text = "正在连接..."
 
 # Every action behind these buttons needs the server, so they stay greyed out until the client is connected
 func RefreshServerButtons():
@@ -313,7 +313,7 @@ func RefreshServerButtons():
 		Launcher.GUI.buttonBoxes.Enable(UICommons.ButtonBox.SECONDARY, reachable)
 		Launcher.GUI.buttonBoxes.Enable(UICommons.ButtonBox.CANCEL, reachable)
 		if not reachable and onlineIndicator:
-			onlineIndicator.text = "Connecting..."
+			onlineIndicator.text = "正在连接..."
 
 	if reachable:
 		Launcher.GUI.buttonBoxes.Suggest(UICommons.ButtonBox.PRIMARY)
