@@ -76,7 +76,8 @@ jobs:
         run: |
           test -s build/android/Eternal-World-debug.apk
           ls -lh build/android/Eternal-World-debug.apk
-          file build/android/Eternal-World-debug.apk
+          unzip -t build/android/Eternal-World-debug.apk >/dev/null
+          echo "APK archive integrity: OK"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v5
