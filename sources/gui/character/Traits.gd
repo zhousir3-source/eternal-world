@@ -143,6 +143,12 @@ func Randomize():
 	if raceCount == 0:
 		raceCount = DB.RacesDB.size()
 
+	# Imported content can be incomplete during startup or on a broken export.
+	# Never divide by zero while generating a character preview.
+	if hairstylesCount <= 0 or haircolorsCount <= 0 or raceCount <= 0:
+		push_warning("Character appearance resources are missing; randomization skipped.")
+		return
+
 	hairstyleValue = randi() % hairstylesCount
 	RefreshHairstyle()
 	haircolorValue = randi() % haircolorsCount
@@ -151,5 +157,6 @@ func Randomize():
 	RefreshGender()
 	raceValue = randi() % raceCount
 	RefreshRace()
-	skintoneValue = randi() % skintoneCount
-	RefreshSkintone()
+	if skintoneCount > 0:
+		skintoneValue = randi() % skintoneCount
+		RefreshSkintone()
