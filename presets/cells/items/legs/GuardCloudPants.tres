@@ -14,6 +14,6 @@ shader = ExtResource("3_x4drf")
 buyPrice = 1900
 sellPrice = 190
 id = 2687533109
-name = "Guard Cloud Pants"
+name = "守卫云纹长裤"
 icon = ExtResource("1_x4drf")
 weight = 300.0
