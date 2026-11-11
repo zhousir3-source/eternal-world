@@ -126,16 +126,26 @@ func AddCharacter(info : Dictionary, equipment : Dictionary, slotID : int = Acto
 	RemoveCharacter(availableSlot)
 	charactersInfo[availableSlot] = info
 	charactersNode[availableSlot] = entity
+	# Character preview visuals are initialized when the entity enters the scene tree.
+	# Defer the first update until ready so the body, face and hair are not left blank.
+	entity.ready.connect(_on_character_preview_ready.bind(entity, availableSlot), CONNECT_ONE_SHOT)
 	Launcher.Map.AddChild(entity)
-
-	var randDir : Vector2 = Vector2(randf_range(-0.8, 0.8), 1.0)
-	var randState : ActorCommons.State = ActorCommons.State.IDLE if isCharacterCreatorEnabled or randi() % 2 == 1 else ActorCommons.State.SIT
-	entity.Update(Vector2.ZERO, ActorCommons.CharacterScreenLocations[availableSlot], randDir, randState, -1, true)
 
 	if not HasSlot(currentCharacterID) or MoreRecentThan(info, charactersInfo[currentCharacterID]) or info["nickname"].is_empty():
 		UpdateSelectedCharacter(info, availableSlot)
 
 	RefreshCharacterList()
+
+func _on_character_preview_ready(entity : Entity, slotID : int):
+	if not is_instance_valid(entity) or not HasSlot(slotID):
+		return
+	if entity.visual:
+		entity.visual.SetBody()
+		entity.visual.SetFace()
+		entity.visual.SetHair()
+	var randDir : Vector2 = Vector2(randf_range(-0.8, 0.8), 1.0)
+	var randState : ActorCommons.State = ActorCommons.State.IDLE if isCharacterCreatorEnabled or randi() % 2 == 1 else ActorCommons.State.SIT
+	entity.Update(Vector2.ZERO, ActorCommons.CharacterScreenLocations[slotID], randDir, randState, -1, true)
 
 func RemoveCharacter(slotID : int):
 	if HasSlot(slotID):
