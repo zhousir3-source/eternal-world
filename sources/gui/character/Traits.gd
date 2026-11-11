@@ -84,15 +84,15 @@ func _on_haircolor_next_button():
 
 # Gender
 func RefreshGender():
-	genderLabel.set_text(ActorCommons.GetGenderName(genderValue))
+	genderLabel.set_text("男" if genderValue == ActorCommons.Gender.MALE else "女")
 	bodyUpdate.emit()
 
 func _on_gender_prev_button():
-	genderValue = genderValue - 1 if genderValue > 0 else ActorCommons.Gender.COUNT - 1
+	genderValue = ActorCommons.Gender.FEMALE if genderValue == ActorCommons.Gender.MALE else ActorCommons.Gender.MALE
 	RefreshGender()
 
 func _on_gender_next_button():
-	genderValue = genderValue + 1 if genderValue < ActorCommons.Gender.COUNT - 1 else 0
+	genderValue = ActorCommons.Gender.FEMALE if genderValue == ActorCommons.Gender.MALE else ActorCommons.Gender.MALE
 	RefreshGender()
 
 # Race
@@ -147,7 +147,7 @@ func Randomize():
 	RefreshHairstyle()
 	haircolorValue = randi() % haircolorsCount
 	RefreshHaircolor()
-	genderValue = randi() % ActorCommons.Gender.COUNT
+	genderValue = ActorCommons.Gender.MALE
 	RefreshGender()
 	raceValue = randi() % raceCount
 	RefreshRace()
