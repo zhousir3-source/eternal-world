@@ -31,20 +31,20 @@ func FillWarningLabel(err : NetworkCommons.CharacterError):
 			warn = ""
 			EnableCharacterCreator(false)
 		NetworkCommons.CharacterError.ERR_ALREADY_LOGGED_IN:
-			warn = "Character is already logged in."
+			warn = "该角色已在游戏中。"
 		NetworkCommons.CharacterError.ERR_TIMEOUT:
-			warn = "Could not connect to the server (Error %d)." % err
+			warn = "无法连接服务器（错误代码：%d）。" % err
 		NetworkCommons.CharacterError.ERR_MISSING_PARAMS:
-			warn = "Some character information are missing."
+			warn = "角色信息不完整，请检查后重试。"
 			RequestFocus(characterNameLineEdit)
 		NetworkCommons.CharacterError.ERR_NAME_AVAILABLE:
-			warn = "Character name not available."
+			warn = "该角色名称不可用。"
 			RequestFocus(characterNameLineEdit)
 		NetworkCommons.CharacterError.ERR_NAME_VALID:
-			warn = "Name should should only include alpha-numeric characters and symbols."
+			warn = "名称只能包含字母、数字和允许使用的符号。"
 			RequestFocus(characterNameLineEdit)
 		NetworkCommons.CharacterError.ERR_NAME_SIZE:
-			warn = "Name length should be inbetween %d and %d character long." % [NetworkCommons.PlayerNameMinSize, NetworkCommons.PlayerNameMaxSize]
+			warn = "名称长度必须为%d至%d个字符。" % [NetworkCommons.PlayerNameMinSize, NetworkCommons.PlayerNameMaxSize]
 			RequestFocus(characterNameLineEdit)
 		NetworkCommons.CharacterError.ERR_EMPTY_ACCOUNT:
 			EnableCharacterCreator(true)
@@ -198,8 +198,8 @@ func DeleteCharacter():
 	UICommons.MessageBox("""Are you sure you want to delete this character?
 This action is permanent, and you will not be able to recover or use this character again.
 """,
-		Callback.Empty, "Cancel",
-		ConfirmDeleteCharacter, "Confirm")
+		Callback.Empty, "取消",
+		ConfirmDeleteCharacter, "确认")
 
 func ConfirmDeleteCharacter():
 	if Network.DeleteCharacter(characterNameDisplay.get_text()):
@@ -273,17 +273,17 @@ func EnableCharacterCreator(enable : bool):
 	if Launcher.GUI.buttonBoxes:
 		Launcher.GUI.buttonBoxes.ClearAll()
 		if enable:
-			Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "Create", CreateCharacter)
-			Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.SECONDARY, "Randomize", RandomizeCharacter)
-			Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "Cancel", EnableCharacterCreator.bind(false))
+			Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "创建角色", CreateCharacter)
+			Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.SECONDARY, "随机外观", RandomizeCharacter)
+			Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "取消", EnableCharacterCreator.bind(false))
 			RefreshSuggestedButton()
 		else:
-			Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "Select", SelectCharacter)
+			Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.PRIMARY, "进入游戏", SelectCharacter)
 			if NextAvailableSlot() != ActorCommons.InvalidCharacterSlot:
-				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.SECONDARY, "New Player", EnableCharacterCreator.bind(true))
+				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.SECONDARY, "新建角色", EnableCharacterCreator.bind(true))
 			if currentCharacterID != ActorCommons.InvalidCharacterSlot:
-				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.TERTIARY, "Delete Player", DeleteCharacter.bind())
-			Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "Cancel", Leave)
+				Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.TERTIARY, "删除角色", DeleteCharacter.bind())
+			Launcher.GUI.buttonBoxes.Bind(UICommons.ButtonBox.CANCEL, "取消", Leave)
 			RefreshSuggestedButton()
 
 func UpdateCharacterCreatorBody():
