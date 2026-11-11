@@ -88,11 +88,11 @@ func RefreshGender():
 	bodyUpdate.emit()
 
 func _on_gender_prev_button():
-	genderValue = ActorCommons.Gender.FEMALE if genderValue == ActorCommons.Gender.MALE else ActorCommons.Gender.MALE
+	genderValue = ActorCommons.Gender.MALE
 	RefreshGender()
 
 func _on_gender_next_button():
-	genderValue = ActorCommons.Gender.FEMALE if genderValue == ActorCommons.Gender.MALE else ActorCommons.Gender.MALE
+	genderValue = ActorCommons.Gender.FEMALE
 	RefreshGender()
 
 # Race
