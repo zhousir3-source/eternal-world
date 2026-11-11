@@ -11,13 +11,13 @@ var lineIdx : int								= 0
 var lineShownTimestamp : int					= 0
 
 const MinLineDurationMs : int					= 1500
-const DefaultText : String						= "Loading..."
+const DefaultText : String						= "正在加载"
 const ProgressLines : PackedStringArray			= [
-	"Making pixel squarish",
-	"Turn on the lights",
-	"Shade our particles",
-	"Shake the sandglobe",
-	"Feed the slimes",
+	"正在整理像素方块",
+	"正在点亮冒险世界",
+	"正在绘制粒子效果",
+	"正在摇匀沙之世界",
+	"正在喂养史莱姆",
 ]
 
 #
