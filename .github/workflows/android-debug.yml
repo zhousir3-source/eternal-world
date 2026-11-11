@@ -87,13 +87,32 @@ jobs:
           if len(candidates) != 1:
               raise SystemExit(f'Expected one Simplified Chinese font face, found {len(candidates)}')
           font = candidates[0]
-          required = '夏叶男女创建角色保存读取背包装备技能任务设置退出确认中文字体'
+          from pathlib import Path
+          import re
+          # Validate every Han character in player-visible source assets, not only a sample.
+          text_extensions = {'.gd', '.tscn', '.tres', '.json', '.csv', '.po'}
+          roots = [Path('sources'), Path('presets'), Path('data')]
+          required = set('夏叶男女创建角色保存读取背包装备技能任务设置退出确认中文字体')
+          scanned = 0
+          for root in roots:
+              if not root.exists():
+                  continue
+              for path in root.rglob('*'):
+                  if not path.is_file() or path.suffix.lower() not in text_extensions:
+                      continue
+                  try:
+                      contents = path.read_text(encoding='utf-8')
+                  except UnicodeDecodeError:
+                      continue
+                  required.update(re.findall(r'[\\u3400-\\u9fff]', contents))
+                  scanned += 1
           supported = set().union(*(set(table.cmap) for table in font['cmap'].tables if table.isUnicode()))
-          missing = sorted({character for character in required if ord(character) not in supported})
+          missing = sorted(character for character in required if ord(character) not in supported)
           if missing:
-              raise SystemExit(f'Chinese UI font is missing required glyphs: {"".join(missing)}')
+              raise SystemExit(f'Chinese UI font is missing {len(missing)} glyphs: {"".join(missing)}')
           print('Selected font face:', sorted(names(font)))
-          print('Verified Chinese UI glyphs:', len(set(required)))
+          print('Scanned text assets:', scanned)
+          print('Verified Chinese glyphs:', len(required))
           font.flavor = None
           font.save('data/graphics/fonts/NotoSansSC-Regular.ttf')
           PY
