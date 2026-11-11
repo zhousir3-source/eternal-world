@@ -24,7 +24,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 1
-titleText = "Progress"
+titleText = "冒险记录"
 
 [node name="Margin" type="MarginContainer" parent="Layout" unique_id=1068376364]
 custom_minimum_size = Vector2(0, 1)
@@ -46,6 +46,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 split_offsets = PackedInt32Array(10)
 split_offset = 10
+tab_name = "任务日志"
 metadata/_tab_index = 0
 
 [node name="QuestScroll" type="ScrollContainer" parent="Layout/Margin/TabBar/QuestLog" unique_id=322372117]
@@ -81,6 +82,7 @@ bbcode_enabled = true
 visible = false
 layout_mode = 2
 mouse_force_pass_scroll_events = false
+tab_name = "魔物图鉴"
 metadata/_tab_index = 1
 
 [node name="BestiaryList" type="VBoxContainer" parent="Layout/Margin/TabBar/Manapedia" unique_id=373734723]
@@ -91,7 +93,7 @@ size_flags_vertical = 3
 [node name="BestiaryLabel" type="RichTextLabel" parent="Layout/Margin/TabBar/Manapedia/BestiaryList" unique_id=2062008106]
 layout_mode = 2
 mouse_filter = 1
-text = "Bestiary"
+text = "魔物图鉴"
 fit_content = true
 
 [node name="Monsters" type="VBoxContainer" parent="Layout/Margin/TabBar/Manapedia/BestiaryList" unique_id=1287439083]
