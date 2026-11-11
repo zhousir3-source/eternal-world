@@ -49,7 +49,7 @@ func FillWarningLabel(err : NetworkCommons.CharacterError):
 		NetworkCommons.CharacterError.ERR_EMPTY_ACCOUNT:
 			EnableCharacterCreator(true)
 		_:
-			warn = "Unknown character issue (Error %d).\nPlease contact us via our [url=%s][color=#%s]Discord server[/color][/url].\n" % [err, LauncherCommons.DiscordInviteLink, UICommons.WarnTextColor]
+			warn = "发生未知角色错误（错误代码：%d）。\n请通过 [url=%s][color=#%s]Discord 社区[/color][/url] 联系我们。\n" % [err, LauncherCommons.DiscordInviteLink, UICommons.WarnTextColor]
 
 	if not warn.is_empty():
 		warn = "[color=#%s]%s[/color]" % [UICommons.WarnTextColor.to_html(false), warn]
@@ -195,8 +195,8 @@ func SelectCharacter():
 		FSM.EnterState(FSM.States.CHAR_PROGRESS)
 
 func DeleteCharacter():
-	UICommons.MessageBox("""Are you sure you want to delete this character?
-This action is permanent, and you will not be able to recover or use this character again.
+	UICommons.MessageBox("""确定要删除这个角色吗？
+此操作不可撤销，删除后将无法恢复或继续使用该角色。
 """,
 		Callback.Empty, "取消",
 		ConfirmDeleteCharacter, "确认")
