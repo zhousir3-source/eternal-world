@@ -179,3 +179,14 @@
 - 构建测试：执行环境检查发现有 `java`，但无 `godot`/`godot4`、`sdkmanager`、`adb`。Godot 解析、自动化测试、Android APK 构建、实机断网验证均**未执行/未验证**；本轮没有 APK。
 - 阻塞：`Login.gd` 仍含 `OfflineAccountName`、`OfflineAccountPassword`、`Network.CreateAccount`、`Network.LoginWithPassword`；`Character.gd` 仍走 `Network.CreateCharacter`。隐藏账号并不是真正单机；本轮未触碰账号、网络或旧存档格式。
 - 下一步：在具备 Godot 4.7 与 Android SDK 的环境中验证导出资源与构建；随后集中处理不经过账号/网络 RPC 的本地角色创建、自动加载和保存，保留旧档兼容性。中文字体随 APK 实际资源一起验证。
+
+## 2026-11-12 本轮：角色错误提示移除外部社区跳转
+
+- 范围：角色创建/选择错误分支中的未知错误提示此前引导玩家访问 Source of Mana Discord 社区，与原创中文单机 RPG 的产品定位不符；改为中文本地处理提示，不再要求联网求助。此修改**不代表**已移除游戏内部网络或账号依赖。
+- 修改文件：`sources/gui/character/Character.gd`；代码提交 `ed4fa94ab103f715fa8f1886fd3c99bf5d73d709`。
+- 代码检查：GitHub 提交后重新读取文件，确认未知角色错误分支不再包含 Discord 社区链接，新的中文错误提示已存在。仅完成文本级检查，Godot 解析未验证。
+- 分支核查（本轮开始）：相对 `ew/loot-build-mvp` 超前130、落后0；相对 `master` 超前176、落后1。只修改开发分支，未合并。
+- 汉化模块进度：角色创建错误提示修正一处；UI/HUD/NPC/任务/怪物/物品/武器/防具/技能/商店/制作/系统提示完整覆盖率未验证。
+- 构建环境检查：检测到 `java`，未检测到 `godot`/`godot4`、`sdkmanager`、`adb`。因此 Godot 解析、自动化测试、Android 构建、实机测试均未执行/未验证，未生成 APK。
+- 阻塞：隐藏账号、本地服务器和网络角色 RPC 仍存在；未实现真正无账号离线启动、本地角色创建、自动加载和手动/自动存档。中文字体随 APK 的实际覆盖未验证。
+- 下一步：优先在独立分支实现与账号/RPC 脱钩的本地角色数据读取与写入，再连接首次启动和存档自动读取；构建环境就绪后运行 Godot 和 Android 导出。
