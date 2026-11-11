@@ -1,4 +1,9 @@
 name: "godot-ci export"
+
+# Cancel obsolete builds when a newer commit is pushed to the same branch.
+concurrency:
+  group: godot-ci-${{ github.ref }}
+  cancel-in-progress: true
 on:
   push:
     branches:
@@ -10,6 +15,8 @@ jobs:
     with:
       mode: debug
       features: sentry
+      # MVP targets only: Android/Web clients and the Linux authoritative server.
+      targets: Android,Web,Linux (Headless Server)
     secrets: inherit
 
   snap:
