@@ -40,7 +40,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
 theme_override_colors/font_color = Color(1, 1, 0.866667, 1)
-text = "你"
+text = "我方"
 
 [node name="Separator" type="VSeparator" parent="Layout/Margin/Content/Header" unique_id=1630451008]
 layout_mode = 2
@@ -233,7 +233,7 @@ text = "完成"
 [node name="Lock" type="Button" parent="Layout/Margin/Content/Footer" unique_id=1630451039]
 layout_mode = 2
 theme_type_variation = &"LargeButton"
-text = "锁定"
+text = "已确认"
 
 [node name="Cancel" type="Button" parent="Layout/Margin/Content/Footer" unique_id=1630451040]
 layout_mode = 2
