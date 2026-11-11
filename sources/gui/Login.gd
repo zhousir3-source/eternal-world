@@ -61,8 +61,6 @@ func FillWarningLabel(err : NetworkCommons.AuthError):
 		if err == NetworkCommons.AuthError.ERR_OK:
 			autoOfflineLogin = false
 			nameText = OfflineAccountName
-			SaveAccountName()
-			FSM.EnterState(FSM.States.CHAR_SCREEN)
 			return
 		autoOfflineLogin = false
 		Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]本地冒险初始化失败，请重启游戏或检查存档目录。[/color]")
