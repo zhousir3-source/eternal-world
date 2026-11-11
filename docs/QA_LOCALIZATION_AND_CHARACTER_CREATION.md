@@ -155,3 +155,16 @@
 - 兼容性：未修改存档格式、角色字段、网络协议、master 或其他分支；未合并、未发布。
 - 遗留阻塞：账号登录和 `Network.CreateCharacter`、`Network.CharacterListing`、`Network.ConnectCharacter` 依赖尚未拆除，真正无账号单机与本地自动/手动存档未完成；字体打包与 Android 导出尚未验证。
 - 下一步：优先定位真实存档持久化与角色启动数据所有者，在不覆盖旧存档的前提下实现一个可验收的本地角色创建/读取切片；具备 Godot + Android SDK 环境后立即执行解析和 APK 导出。
+
+## 2026-11-11 本轮：Android 测试包启动器入口修复
+
+- 范围：修复 Android 导出预设将应用设为不显示在手机启动器中的问题；这是 Android 可安装测试版的打包配置修复，不代表 APK 已经生成。
+- 修改文件：`export_presets.cfg`，仅将 Android 预设中的 `package/show_as_launcher_app=false` 改为 `true`，其余导出设置保持不变。
+- 代码提交：`0093306ae973599f60cdd58918225a83a32ee541`。
+- 提交前分支比较：相对 `ew/loot-build-mvp` 超前 126、落后 0；相对 `master` 超前 172、落后 1；未合并或修改 master。
+- 静态检查：远程重新读取 `export_presets.cfg`，确认 Android 预设中仅有一处 `package/show_as_launcher_app=true`；此项文本检查通过。GitHub 提交未返回成功的 CI 状态。
+- 构建环境：本轮检查执行环境：有 Java，但没有 Godot 可执行程序，且未配置 Android SDK。Godot 项目解析、自动化测试、Android APK 构建、安装与断网实机测试均**未验证**。
+- 汉化模块进度：本轮不涉及文本翻译。角色创建部分已有中文代码，但 UI/HUD、NPC、任务、怪物、物品、武器、防具、技能、商店、制作及提示的全量覆盖率仍未验证。
+- 旧档兼容：不修改存档格式、数据字段、角色创建路径或任何旧存档。
+- 阻塞：游戏仍含账号认证、隐藏本地账号、Network 角色创建及本地服务依赖；不能称为真正离线单机。中文字体打包尚未验证，APK 尚未生成。
+- 下一步：先准备可运行的 Godot 4.7 与 Android SDK 构建环境并验证导出配置；随后优先实现无账号的本地角色创建、加载和保存闭环，保持旧档兼容。
