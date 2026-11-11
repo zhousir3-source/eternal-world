@@ -77,7 +77,7 @@ jobs:
         run: |
           test -s build/android/XiaYe-zh-preview-debug.apk
           ls -lh build/android/XiaYe-zh-preview-debug.apk
-          unzip -t build/android/Eternal-World-debug.apk >/dev/null
+          unzip -t build/android/XiaYe-zh-preview-debug.apk >/dev/null
           echo "APK archive integrity: OK"
 
       - name: Upload APK artifact
