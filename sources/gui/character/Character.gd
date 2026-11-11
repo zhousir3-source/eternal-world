@@ -49,7 +49,7 @@ func FillWarningLabel(err : NetworkCommons.CharacterError):
 		NetworkCommons.CharacterError.ERR_EMPTY_ACCOUNT:
 			EnableCharacterCreator(true)
 		_:
-			warn = "发生未知角色错误（错误代码：%d）。\n请通过 [url=%s][color=#%s]Discord 社区[/color][/url] 联系我们。\n" % [err, LauncherCommons.DiscordInviteLink, UICommons.WarnTextColor]
+			warn = "角色操作失败（错误代码：%d）。请保留当前数据并重新启动游戏。" % err
 
 	if not warn.is_empty():
 		warn = "[color=#%s]%s[/color]" % [UICommons.WarnTextColor.to_html(false), warn]
