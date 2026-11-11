@@ -280,6 +280,9 @@ func EnableCharacterCreator(enable : bool):
 	attributesPanel.set_visible(enable)
 
 	if enable:
+		# Offer an editable offline-friendly default without overwriting a typed name.
+		if characterNameLineEdit.text.strip_edges().is_empty():
+			characterNameLineEdit.text = "夏叶"
 		RequestFocus(characterNameLineEdit)
 	else:
 		pendingFocusControl = null
