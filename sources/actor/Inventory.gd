@@ -113,11 +113,11 @@ func HasItem(cell : ItemCell, count : int) -> bool:
 	for item in items:
 		if CellCommons.IsSameItem(cell, item):
 			if cell.stackable:
-				return item.count >= count
+				totalCount += item.count
 			else:
 				totalCount += 1
-				if totalCount >= count:
-					return true
+			if totalCount >= count:
+				return true
 	return false
 
 func HasSpace(count : int) -> bool:
@@ -162,11 +162,13 @@ func EquipItem(cell : ItemCell, itemIndex : int):
 	if not cell or cell.type != CellCommons.Type.ITEM or cell.slot == ActorCommons.Slot.NONE or not actor:
 		return
 
-	var targetItem : Item = null
-	if itemIndex >= 0 and itemIndex < itemCount and CellCommons.IsSameItem(cell, items[itemIndex]):
-		targetItem = items[itemIndex]
-	else:
-		targetItem = Item.new(cell)
+	# An item can only be equipped if the exact instance exists in the inventory.
+	# Never create an equipment instance from client-supplied item data.
+	if itemIndex < 0 or itemIndex >= itemCount:
+		return
+	if not CellCommons.IsSameItem(cell, items[itemIndex]):
+		return
+	var targetItem : Item = items[itemIndex]
 	if equipment[cell.slot] == targetItem:
 		return
 
