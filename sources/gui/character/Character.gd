@@ -203,7 +203,20 @@ func CreateCharacter():
 			if appearance.is_empty():
 				Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]角色外观资源未加载完整，请检查游戏资源后重试。[/color]")
 				return
-			if Network.CreateCharacter(nickname, appearance, attributesPanel.GetValues()):
+			# Android single-player character creation must not call the account/RPC path.
+			# This saves the initial character only; world-state loading and entering
+			# the playable map still require a separate offline implementation.
+			if OS.get_name() == "Android":
+				var character_data : Dictionary = appearance.duplicate(true)
+				character_data["nickname"] = nickname
+				character_data["attributes"] = attributesPanel.GetValues()
+				if not XiaYeLocalSave.WriteNewSave(character_data):
+					Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]本地角色保存失败，已有存档不会被覆盖。[/color]")
+					return
+				EnableCharacterCreator(false)
+				AddCharacter(character_data, {})
+				Launcher.GUI.notificationLabel.AddNotification("角色已保存在本机。")
+			elif Network.CreateCharacter(nickname, appearance, attributesPanel.GetValues()):
 				FSM.EnterState(FSM.States.CHAR_PROGRESS)
 
 func SelectCharacter():
