@@ -38,7 +38,12 @@ func Mode(launchClient : bool = false, launchServer : bool = false) -> bool:
 	Network.Destroy()
 	if launchClient:	Client()
 	if launchServer:	Server()
-	Network.Mode(launchClient, launchServer)
+	# Android is a local single-player target: do not instantiate transport
+	# clients or servers. Client-side rendering/input services still start.
+	if OS.get_name() == "Android":
+		Network.Mode(false, false)
+	else:
+		Network.Mode(launchClient, launchServer)
 
 	DB.Init()
 	_post_launch()
@@ -166,7 +171,8 @@ func _ready():
 		GUI = Scene.get_node("Canvas")
 		Audio = Scene.get_node("Audio")
 		startClient = true
-		startServer = not LauncherCommons.isWeb and (OS.is_debug_build() or OS.get_name() == "Android") and not NetworkCommons.IsLocal
+		# Android must not spin up the legacy account/database server.
+		startServer = not LauncherCommons.isWeb and OS.is_debug_build() and OS.get_name() != "Android" and not NetworkCommons.IsLocal
 
 	if not Root or not Scene:
 		printerr("Could not initialize source's base services")
