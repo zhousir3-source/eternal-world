@@ -43,7 +43,7 @@ static func IsValidCharacter(character: Dictionary) -> bool:
 		return false
 	# Keep gender values compatible with the engine enum, without accepting
 	# arbitrary serialized objects or strings as gender.
-	if not gender is int or gender not in [0, 1]:
+	if not gender is int or gender not in [ActorCommons.Gender.MALE, ActorCommons.Gender.FEMALE, ActorCommons.Gender.NONBINARY]:
 		return false
 	return true
 
