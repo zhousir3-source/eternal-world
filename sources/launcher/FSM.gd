@@ -39,6 +39,11 @@ func IsGameState() -> bool:
 	return currentState == States.IN_GAME
 
 func EnterState(state : States):
+	# Android uses the independent local character screen, never the account UI.
+	# This only changes navigation; it does NOT yet remove server startup or
+	# implement offline map spawning.
+	if OS.get_name() == "Android" and state in [States.LOGIN_SCREEN, States.LOGIN_PROGRESS]:
+		state = States.CHAR_SCREEN
 	Util.PrintLog("Launcher", "Entering new FSM state: %s" % str(States.keys()[state]))
 	nextState = state
 	UpdateStates.call_deferred()
