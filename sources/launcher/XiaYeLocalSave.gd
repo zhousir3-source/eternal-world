@@ -29,7 +29,23 @@ static func ReadSave() -> Dictionary:
 	if not value.has("character") or not value["character"] is Dictionary:
 		push_error("本地存档缺少角色数据，原文件已保留。")
 		return {}
+	if not IsValidCharacter(value["character"]):
+		push_error("本地存档角色数据不合法，原文件已保留。")
+		return {}
 	return value
+
+static func IsValidCharacter(character: Dictionary) -> bool:
+	var nickname: Variant = character.get("nickname", null)
+	var gender: Variant = character.get("gender", null)
+	if not nickname is String or nickname.strip_edges().is_empty():
+		return false
+	if nickname.length() > 30:
+		return false
+	# Keep gender values compatible with the engine enum, without accepting
+	# arbitrary serialized objects or strings as gender.
+	if not gender is int or gender not in [0, 1]:
+		return false
+	return true
 
 static func WriteNewSave(character: Dictionary, world: Dictionary = {}) -> bool:
 	# Fail closed: never overwrite an existing save until migration/backup
@@ -37,7 +53,7 @@ static func WriteNewSave(character: Dictionary, world: Dictionary = {}) -> bool:
 	if HasSave() or FileAccess.file_exists(TEMP_PATH):
 		push_error("已有存档或未完成的临时存档，拒绝覆盖。")
 		return false
-	if character.is_empty() or not character.has("nickname"):
+	if not IsValidCharacter(character):
 		push_error("角色数据不完整，未写入存档。")
 		return false
 	var directory := ProjectSettings.globalize_path(SAVE_DIRECTORY)
@@ -50,6 +66,9 @@ static func WriteNewSave(character: Dictionary, world: Dictionary = {}) -> bool:
 		"world": world
 	}
 	var json_text := JSON.stringify(payload)
+	if json_text.is_empty():
+		push_error("本地存档序列化失败。")
+		return false
 	var file := FileAccess.open(TEMP_PATH, FileAccess.WRITE)
 	if file == null:
 		push_error("无法创建本地临时存档。")
