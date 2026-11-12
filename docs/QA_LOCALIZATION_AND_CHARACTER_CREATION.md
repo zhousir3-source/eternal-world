@@ -326,3 +326,12 @@
 - 汉化模块进度：本轮无新增文本翻译；字体、UI/HUD/NPC/任务/怪物/物品/装备/技能/商店/制作/系统提示覆盖率未验证。
 - 测试：远程提交成功；Godot 解析、运行时 UI 状态切换、存档往返、Android CI/APK 构建及真机均未验证。
 - 下一步：检查 Android GUI 初始化与 FSM 跳转实测；实现不启动本地网络服务的真正离线地图/玩家创建，再验证完整 Android 构建。
+
+## 2026-11-12 本轮：Android 禁止初始化原网络传输和服务端
+
+- 修改前：`ew/zh-localization-next` 比 `ew/loot-build-mvp` 超前164；比 `master` 超前210、落后1；上一轮遗留 Android 状态机仅跳过登录 UI，但 `Launcher` 仍创建本地服务器、账号及网络传输。
+- 修改文件：`sources/launcher/Launcher.gd`；提交 `479d606975fde8bc785453e05e3efe2ad6f5f47b` 和 `b897bda02d94f98f5b379bddf09900ee5b06f694`。Android 默认不启动 `Server()`，`Mode()` 即使被旧调用者传入 `launchServer=true` 也强制关闭；Android `Network.Mode(false,false)` 不实例化 `NetClient`/`NetServer`，保留本地客户端图形和输入服务。桌面原启动行为不变。
+- 重要风险：这切断了旧引擎网络传输，却没有实现离线 `WorldService` 替代、角色实体创建、地图入场或世界状态序列化；可能暴露原 GUI/场景对 `Network.Client` 的空引用。不能宣称 Android 可玩。
+- 本轮静态核查：读取 `Network.gd` 的 `Mode`，确认 `false,false` 不实例化传输对象；对修改代码执行 GitHub 提交。运行环境 `godot`、`godot4`、`adb`、`sdkmanager` 均不可用；Godot 解析、自动化测试、CI、APK 构建、实机测试均**未验证**。
+- 汉化模块进度：本轮未新增玩家可见翻译；中文字体、UI/HUD、NPC、任务、怪物、物品、武器、防具、技能、商店、制作、系统提示覆盖率未验证。
+- 下一步：核查 GUI/角色创建对 `Network.Client` 的直接依赖，补齐本地角色实体及地图入场；取得 Godot 和 Android 构建环境后运行测试。不得回退到隐藏账号或本地网络服务器作为替代。
