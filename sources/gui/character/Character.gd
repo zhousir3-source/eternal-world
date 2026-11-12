@@ -373,7 +373,7 @@ func RefreshOnce():
 			var character_data : Dictionary = saved["character"]
 			AddCharacter(character_data, {})
 			return
-		if XiaYeLocalSave.HasSave():
+		if XiaYeLocalSave.HasSave() or FileAccess.file_exists(XiaYeLocalSave.TEMP_PATH):
 			# A corrupt or unsupported save must never be replaced by a new one.
 			Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]本地存档无法读取，原文件已保留。请先备份存档。[/color]")
 			return
