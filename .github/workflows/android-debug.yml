@@ -104,7 +104,7 @@ jobs:
                       contents = path.read_text(encoding='utf-8')
                   except UnicodeDecodeError:
                       continue
-                  required.update(re.findall(r'[\\u3400-\\u9fff]', contents))
+                  required.update(re.findall(r'[\u3400-\u9fff]', contents))
                   scanned += 1
           supported = set().union(*(set(table.cmap) for table in font['cmap'].tables if table.isUnicode()))
           missing = sorted(character for character in required if ord(character) not in supported)
