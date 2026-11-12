@@ -107,6 +107,9 @@ func RefreshRace():
 	var races : PackedInt64Array = DB.RacesDB.keys()
 	if raceValue >= 0 and raceValue < raceCount:
 		var data : RaceData = DB.GetRace(races[raceValue])
+		if not data:
+			push_warning("Character race resource is unavailable.")
+			return
 		raceLabel.set_text(data.name)
 		RefreshSkintone()
 		bodyUpdate.emit()
@@ -124,6 +127,11 @@ func RefreshSkintone():
 	var races : PackedInt64Array = DB.RacesDB.keys()
 	if raceValue >= 0 and raceValue < raceCount:
 		var data : RaceData = DB.GetRace(races[raceValue])
+		if not data:
+			skintoneCount = 0
+			skintoneLabel.set_text("不可用")
+			push_warning("Character skin resources are unavailable.")
+			return
 		var skins : Dictionary[String, Material] = data.skins
 		var skinsKeys : PackedStringArray = skins.keys()
 		skintoneCount = data.skins.size()
