@@ -366,6 +366,19 @@ func RefreshOnce():
 
 	EnableCharacterCreator(isCharacterCreatorEnabled)
 	UpdateSelectedCharacter({}, currentCharacterID)
+	if OS.get_name() == "Android":
+		# Read the independent on-device save; do not request a server character list.
+		var saved : Dictionary = XiaYeLocalSave.ReadSave()
+		if not saved.is_empty():
+			var character_data : Dictionary = saved["character"]
+			AddCharacter(character_data, {})
+			return
+		if XiaYeLocalSave.HasSave():
+			# A corrupt or unsupported save must never be replaced by a new one.
+			Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]本地存档无法读取，原文件已保留。请先备份存档。[/color]")
+			return
+		EnableCharacterCreator(true)
+		return
 	Network.CharacterListing()
 
 func Clear():
