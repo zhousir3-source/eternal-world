@@ -220,6 +220,12 @@ func CreateCharacter():
 				FSM.EnterState(FSM.States.CHAR_PROGRESS)
 
 func SelectCharacter():
+	# Never send an Android local-save character into the legacy online RPC.
+	# Offline map spawning is not implemented yet: fail visibly instead of
+	# silently authenticating or opening a network connection.
+	if OS.get_name() == "Android":
+		Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]离线地图加载尚未完成，角色存档已保留。[/color]")
+		return
 	if Network.ConnectCharacter(characterNameDisplay.get_text()):
 		FSM.EnterState(FSM.States.CHAR_PROGRESS)
 
@@ -231,6 +237,11 @@ func DeleteCharacter():
 		ConfirmDeleteCharacter, "确认")
 
 func ConfirmDeleteCharacter():
+	# Local saves require a separate explicit backup/confirmation workflow.
+	# The legacy account deletion RPC must never be called for Android saves.
+	if OS.get_name() == "Android":
+		Launcher.GUI.notificationLabel.AddNotification("[color=#ff7777]本地存档删除功能尚未开放，存档不会被删除。[/color]")
+		return
 	if Network.DeleteCharacter(characterNameDisplay.get_text()):
 		RemoveCharacter(currentCharacterID)
 
