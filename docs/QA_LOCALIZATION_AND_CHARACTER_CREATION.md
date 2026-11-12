@@ -308,3 +308,12 @@
 - 静态检查：GitHub 文件更新成功；Godot、godot4、adb、sdkmanager 命令均未找到。Godot 解析、界面运行、存档往返、CI 和 Android APK 构建均**未验证**。
 - 汉化模块进度：新增中文损坏存档提示；其他 UI/HUD/NPC/任务/怪物/物品/装备/技能/商店/制作/系统提示覆盖率仍未验证。
 - 关键未完成：Android 启动仍使用原隐藏账号流程；进入地图仍调用 `Network.ConnectCharacter`，不能离线玩；本地世界状态保存/读取与自动/手动存档尚未实现。下一步优先重构启动到角色界面的无账号路径，并完成独立的角色入图流程。
+
+## 2026-11-12 13:45 Android 本地角色网络 RPC 防护
+
+- 修改前检查：`ew/zh-localization-next` 比 `ew/loot-build-mvp` 超前160、落后0；比 `master` 超前206、落后1。遗留问题为隐藏账号启动、角色入图网络 RPC、世界状态持久化及 APK 构建。
+- 代码修改：`sources/gui/character/Character.gd`，提交 `7f586897c8ac6a9fca75b3eeb401aa90a2ebe0d3`；本记录另行提交。
+- Android 点击“进入游戏”时，不再调用 `Network.ConnectCharacter`，明确提示离线地图加载未完成；确认删除角色时不再调用 `Network.DeleteCharacter`，不触碰本地存档。桌面原有行为保留。**这是防止错误网络操作的保护，不是离线进入地图的实现。**
+- 静态检查：对 GitHub 源码进行了精确匹配替换并提交；Godot 解析、测试、Android CI、APK 构建和实机运行均未执行，标记**未验证**。
+- 汉化：增加两条玩家可见中文错误提示；UI/HUD、NPC、任务、怪物、物品、武器、防具、技能、商店、制作、系统提示总体覆盖率未验证。
+- 剩余工作：Android 启动仍存在账号流程；本地角色无法进入可玩地图；自动/手动世界存档未完成；中文字体及 Android APK 未验证。下一步应沿 FSM 初始化路径实现真正跳过登录并独立初始化本地世界/角色，避免仅隐藏页面。
