@@ -299,3 +299,12 @@
 - 静态检查：GitHub 回读确认 Android 分支、本地保存调用、桌面兼容分支均存在。当前运行环境未找到 `godot`、`godot4`、`adb`、`sdkmanager`；Godot 解析、自动化测试、Android 构建、APK 安装与实机验证均**未执行/未验证**。
 - 汉化模块进度：新增“本地角色保存失败”“角色已保存在本机”中文提示；其余 UI/HUD/NPC/任务/怪物/物品/武器/防具/技能/商店/制作/系统提示整体覆盖率未验证。
 - 重要限制：Android 启动仍经过原登录/隐藏账号流程，已有存档尚未自动加载，点击“进入游戏”仍走网络 RPC，无法宣称真正离线单机；本轮代码在角色创建页面可到达时才生效。下一轮应优先拆除 Android 启动账号流程并接入存档读取，同时实现独立进入地图路径。
+
+## 2026-11-12 本轮：Android 角色选择界面自动读取本地角色
+
+- 本轮开始检查：`ew/zh-localization-next` 相对 `ew/loot-build-mvp` 超前157、落后0；相对 `master` 超前203、落后1。上一轮已将 Android 创建角色写入 `XiaYeLocalSave`，但角色列表仍调用 RPC。
+- 修改文件：`sources/gui/character/Character.gd`；代码提交 `ebe881c2202f1a262afad83cb3fdedd78fdbc7a2`、`630e64f0636d1c484056c712487ce6cd114feee1`。
+- 实际改动：Android 角色界面 `RefreshOnce` 从 `XiaYeLocalSave.ReadSave()` 读取本地角色并调用已有 `AddCharacter` 显示预览；无存档时进入可编辑的角色创建；损坏/不兼容存档或遗留临时文件时阻止新建流程并保留数据；Android 不再在此入口调用 `Network.CharacterListing()`，桌面网络路径保持原状。
+- 静态检查：GitHub 文件更新成功；Godot、godot4、adb、sdkmanager 命令均未找到。Godot 解析、界面运行、存档往返、CI 和 Android APK 构建均**未验证**。
+- 汉化模块进度：新增中文损坏存档提示；其他 UI/HUD/NPC/任务/怪物/物品/装备/技能/商店/制作/系统提示覆盖率仍未验证。
+- 关键未完成：Android 启动仍使用原隐藏账号流程；进入地图仍调用 `Network.ConnectCharacter`，不能离线玩；本地世界状态保存/读取与自动/手动存档尚未实现。下一步优先重构启动到角色界面的无账号路径，并完成独立的角色入图流程。
