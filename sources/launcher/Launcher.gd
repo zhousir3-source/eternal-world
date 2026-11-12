@@ -29,6 +29,9 @@ signal shadersWarmed
 
 #
 func Mode(launchClient : bool = false, launchServer : bool = false) -> bool:
+	# Never initialize server services even if a legacy caller requests them.
+	if OS.get_name() == "Android":
+		launchServer = false
 	var isClientConnected : bool = Network.Client != null
 	var isServerConnected : bool = Network.ENetServer != null or Network.WebSocketServer != null
 	if isClientConnected == launchClient and isServerConnected == launchServer:
